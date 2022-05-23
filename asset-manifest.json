@@ -1,20 +1,20 @@
 {
   "files": {
     "main.css": "https://qiwarsqannel.github.io/static/css/main.b6c68f36.chunk.css",
-    "main.js": "https://qiwarsqannel.github.io/static/js/main.7b65e343.chunk.js",
-    "main.js.map": "https://qiwarsqannel.github.io/static/js/main.7b65e343.chunk.js.map",
+    "main.js": "https://qiwarsqannel.github.io/static/js/main.9ccfac61.chunk.js",
+    "main.js.map": "https://qiwarsqannel.github.io/static/js/main.9ccfac61.chunk.js.map",
     "runtime-main.js": "https://qiwarsqannel.github.io/static/js/runtime-main.e82a7b34.js",
     "runtime-main.js.map": "https://qiwarsqannel.github.io/static/js/runtime-main.e82a7b34.js.map",
-    "static/js/2.17b681aa.chunk.js": "https://qiwarsqannel.github.io/static/js/2.17b681aa.chunk.js",
-    "static/js/2.17b681aa.chunk.js.map": "https://qiwarsqannel.github.io/static/js/2.17b681aa.chunk.js.map",
+    "static/js/2.5cf71bf3.chunk.js": "https://qiwarsqannel.github.io/static/js/2.5cf71bf3.chunk.js",
+    "static/js/2.5cf71bf3.chunk.js.map": "https://qiwarsqannel.github.io/static/js/2.5cf71bf3.chunk.js.map",
     "index.html": "https://qiwarsqannel.github.io/index.html",
     "static/css/main.b6c68f36.chunk.css.map": "https://qiwarsqannel.github.io/static/css/main.b6c68f36.chunk.css.map",
-    "static/js/2.17b681aa.chunk.js.LICENSE.txt": "https://qiwarsqannel.github.io/static/js/2.17b681aa.chunk.js.LICENSE.txt"
+    "static/js/2.5cf71bf3.chunk.js.LICENSE.txt": "https://qiwarsqannel.github.io/static/js/2.5cf71bf3.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.e82a7b34.js",
-    "static/js/2.17b681aa.chunk.js",
+    "static/js/2.5cf71bf3.chunk.js",
     "static/css/main.b6c68f36.chunk.css",
-    "static/js/main.7b65e343.chunk.js"
+    "static/js/main.9ccfac61.chunk.js"
   ]
 }
