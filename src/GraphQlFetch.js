@@ -86,11 +86,11 @@ export function get_chart_options() {
 export function format_gauge_data(input) {
   var stringToColour = function (str) {
     var hash = 0;
-    for (var i = 0; i < str.length; i++) {
+    for (let i = 0; i < str.length; i++) {
       hash = str.charCodeAt(i) + ((hash << 5) - hash);
     }
     var colour = '#';
-    for (var i = 0; i < 3; i++) {
+    for (let i = 0; i < 3; i++) {
       var value = (hash >> (i * 8)) & 0xFF;
       colour += ('00' + value.toString(16)).substr(-2);
     }
@@ -113,7 +113,7 @@ export function format_gauge_data(input) {
       r[choices[j]]["data"][i] = (a["scores"][j] * 100) / total;
       labels.pushIfNotIncluded("Gauge " + (i + 1));
     }
-    let scores = a["scores"];
+    //let scores = a["scores"];
     //result[i] =  {[i]: Object.assign.apply({}, choices.map( (v, i) => ( {[v]: scores[i]} ) ) ) };
   }
   result["labels"] = labels;

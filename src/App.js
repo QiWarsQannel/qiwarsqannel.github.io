@@ -26,8 +26,26 @@ ChartJS.register(
   Legend
 );
 
-
 const query = {
+  query: `query {
+    proposals (
+      first: 200,
+      where: {
+        space: "qidao.eth",
+        title_contains: "Vault Incentives Gauge",
+        created_gte: 1641442262
+      },
+      orderBy: "created",
+      orderDirection: asc
+    ) {
+      scores_total
+      choices
+      scores
+    }
+  }`,
+  variables: {  }
+};
+/*const query = {
   query: `query {
     proposals (
       where: {
@@ -44,7 +62,7 @@ const query = {
   variables: {
     gauges: get_gauge_addr()
   }
-};
+};*/
 console.log(query);
 const headers = {
   headers: {
@@ -54,13 +72,14 @@ const headers = {
 
 export const options = get_chart_options();
 function App() {
-  const [fdata, setFData] = React.useState({datasets:[]});
+  const [fdata, setFData] = React.useState({ datasets: [] });
   React.useEffect(() => {
     api
       .post("/", query, headers)
       .then(function (response) {
         console.log(format_gauge_data(response.data));
         setFData(format_gauge_data(response.data));
+        console.log("Is it cached? "+response.request.fromCache);
       })
       .catch((err) => {
         console.error("ops! ocorreu um erro" + err);
@@ -71,9 +90,12 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
+        <p>&#x253B;&#x2501;&#x253B; &#xFE35; &#x10DA;(QwQ&#x10DA;)</p>
         <Container>
           <Row>
-            <Line data={fdata} options={options} className="responsive-chart" />
+            <Col>
+              <Line data={fdata} options={options} className="responsive-chart" />
+            </Col>
           </Row>
         </Container>
 
