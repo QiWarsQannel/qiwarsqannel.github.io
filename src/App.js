@@ -29,7 +29,7 @@ ChartJS.register(
 const query = {
   query: `query {
     proposals (
-      first: 200,
+      first: 999,
       where: {
         space: "qidao.eth",
         title_contains: "Vault Incentives Gauge",
