@@ -33,7 +33,6 @@ const font_family = '"Console","Fixedsys",monospace';
 
 export function get_chart_options() {
   return {
-    responsive: true,
     maintainAspectRatio: false,
     color: font_color,
     interaction: {
