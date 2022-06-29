@@ -12,6 +12,7 @@ import {
 import { Line } from 'react-chartjs-2';
 import { setup } from 'axios-cache-adapter'
 
+// eslint-disable-next-line
 Array.prototype.pushIfNotIncluded = function (element) {
     if (!this.includes(element)) {
         this.push(element);
@@ -87,6 +88,8 @@ const query = {
     variables: {}
 };
 
+const defaultLegendClickHandler = ChartJS.defaults.plugins.legend.onClick;
+
 const options = {
     responsive: true,
     maintainAspectRatio: false,
@@ -104,25 +107,83 @@ const options = {
         },
         legend: {
             position: "bottom",
+            onClick: (evt, legendItem, legend) => {
+                let allLegendItemsState = [];
+
+                if (legendItem.text === 'HIDE ALL' || legendItem.text === 'SHOW ALL') {
+                    if (typeof legend.hideAll === 'undefined') {
+                        legend.hideAll = false;
+                    }
+
+                    legend.chart.data.datasets.forEach((dataset, i) => {
+                        legend.chart.setDatasetVisibility(i, legend.hideAll)
+                    });
+
+                    legend.hideAll = !legend.hideAll;
+                    legend.chart.update();
+
+                    return;
+                }
+
+
+                defaultLegendClickHandler(evt, legendItem, legend);
+
+
+                allLegendItemsState = legend.chart.data.datasets.map((e, i) => (legend.chart.getDatasetMeta(i).hidden));
+
+                if (allLegendItemsState.every(el => !el)) {
+                    legend.hideAll = false;
+                    legend.chart.update();
+                } else if (allLegendItemsState.every(el => el)) {
+                    legend.hideAll = true;
+                    legend.chart.update();
+                }
+            },
             labels: {
                 font: {
                     family: font_family
+                },
+                generateLabels: (chart) => {
+                    const datasets = chart.data.datasets;
+                    const {
+                        labels: {
+                            usePointStyle,
+                            pointStyle,
+                            textAlign,
+                            color
+                        }
+                    } = chart.legend.options;
+
+                    const legendItems = chart._getSortedDatasetMetas().map((meta) => {
+                        const style = meta.controller.getStyle(usePointStyle ? 0 : undefined);
+
+                        return {
+                            text: datasets[meta.index].label,
+                            fillStyle: style.backgroundColor,
+                            fontColor: color,
+                            hidden: !meta.visible,
+                            lineCap: style.borderCapStyle,
+                            lineDash: style.borderDash,
+                            lineDashOffset: style.borderDashOffset,
+                            lineJoin: style.borderJoinStyle,
+                            strokeStyle: style.borderColor,
+                            pointStyle: pointStyle || style.pointStyle,
+                            rotation: style.rotation,
+                            textAlign: textAlign || style.textAlign,
+                            datasetIndex: meta.index
+                        };
+                    });
+
+                    legendItems.push({
+                        text: (!chart.legend.hideAll || typeof chart.legend.hideAll === 'undefined') ? 'HIDE ALL' : 'SHOW ALL',
+                        fontColor: color,
+                        fillStyle: 'white', // Box color
+                        strokeStyle: 'white', // LineCollor around box
+                    });
+
+                    return legendItems;
                 }
-            },
-            /*onClick: (evt, legendItem, legend) => {
-              const index = legendItem.datasetIndex;
-              const ci = legend.chart;
-    
-              legend.chart.data.datasets.forEach((d, i) => {
-                ci.hide(i);
-                d.hidden = true;
-              })
-    
-              ci.show(index);
-              legendItem.hidden = false;
-    
-              ci.update();
-            }*/
+            }
         }
     },
     scales: {
