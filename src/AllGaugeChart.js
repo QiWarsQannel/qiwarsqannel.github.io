@@ -172,16 +172,16 @@ export default function AllGaugeChart() {
     const [fdata, setFData] = React.useState({ datasets: [] });
 
     React.useEffect(() => {
-        api
-            .post("/", query, headers)
-            .then(function (response) {
-                if (fdata.datasets.length === 0) {
+        if (fdata.datasets.length === 0) {
+            api
+                .post("/", query, headers)
+                .then(function (response) {
                     setFData(format_gauge_data(response.data));
-                }
-            })
-            .catch((err) => {
-                console.error("ops! ocorreu um erro" + err);
-            });
+                })
+                .catch((err) => {
+                    console.error("ops! ocorreu um erro" + err);
+                });
+        }
     }, [fdata]);
 
     return (
