@@ -28,8 +28,6 @@ ChartJS.register(
     Legend
 );
 
-
-
 function format_gauge_data(input) {
     var stringToColour = function (str) {
         var hash = 0;
@@ -177,7 +175,9 @@ export default function AllGaugeChart() {
         api
             .post("/", query, headers)
             .then(function (response) {
-                setFData(format_gauge_data(response.data));
+                if (fdata.datasets.length === 0) {
+                    setFData(format_gauge_data(response.data));
+                }
             })
             .catch((err) => {
                 console.error("ops! ocorreu um erro" + err);
