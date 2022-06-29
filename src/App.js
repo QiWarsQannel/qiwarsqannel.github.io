@@ -90,7 +90,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>&#x253B;&#x2501;&#x253B; &#xFE35; &#x10DA;(QwQ&#x10DA;)</p>
+        <p><span className="table">&#x253B;&#x2501;&#x253B;</span> &#xFE35; <span className="qimp">&#x10DA;(QwQ&#x10DA;)</span></p>
         <Container>
           <Row>
             <Col>

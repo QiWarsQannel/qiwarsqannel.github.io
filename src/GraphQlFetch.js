@@ -29,7 +29,7 @@ Array.prototype.pushIfNotIncluded = function (element) {
 }*/
 
 const font_color = "#FFFFFF";
-const font_family = '"Console","Fixedsys",monospace';
+const font_family = 'monospace';
 
 export function get_chart_options() {
   return {
@@ -53,7 +53,21 @@ export function get_chart_options() {
           font: {
             family: font_family
           }
-        }
+        },
+        /*onClick: (evt, legendItem, legend) => {
+          const index = legendItem.datasetIndex;
+          const ci = legend.chart;
+
+          legend.chart.data.datasets.forEach((d, i) => {
+            ci.hide(i);
+            d.hidden = true;
+          })
+
+          ci.show(index);
+          legendItem.hidden = false;
+
+          ci.update();
+        }*/
       }
     },
     scales: {
