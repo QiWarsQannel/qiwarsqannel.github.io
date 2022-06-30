@@ -3,6 +3,8 @@ import logo from './logo.svg';
 import './App.css';
 import { Container, Row, Col } from "react-grid-system";
 import AllGaugeChart from './AllGaugeChart';
+import TotalVotesChart from './TotalVotesChart';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
@@ -17,7 +19,12 @@ function App() {
           </Row>
           <Row>
             <Col>
-              <AllGaugeChart />
+              <HashRouter>
+                <Routes>
+                  <Route path="/" element={<AllGaugeChart />} />
+                  <Route path="/qipowah" element={<TotalVotesChart />} />
+                </Routes>
+              </HashRouter>
             </Col>
           </Row>
         </Container>
