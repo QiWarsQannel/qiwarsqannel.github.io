@@ -20,6 +20,7 @@ const getOrCreateLegendList = (chart, id) => {
         listContainer.style.display = 'flex';
         listContainer.style.flexDirection = 'row';
         listContainer.style.flexWrap = 'wrap';
+        listContainer.style.rowGap = '3px';
         listContainer.style.justifyContent = 'center';
         listContainer.style.margin = 0;
         listContainer.style.padding = 0;
