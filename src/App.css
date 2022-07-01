@@ -1,24 +1,11 @@
-.App {
-  text-align: center;
-  font-family: monospace !important;
+.logo {
+  margin: 0;
 }
-
-.App-logo {
-  height: 25vmin;
-  pointer-events: none;
+header a {
+  margin-left: 1em;
+  color: white
 }
-
-.App-header {
-  background-color: #222;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.qimp {
+.qimp, .active {
   color: #e24c54;
 }
 .table {
@@ -32,3 +19,9 @@
   min-height: 80vh;
   width: 100% !important;
 }
+.navbar {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
