@@ -120,7 +120,7 @@ const options = {
 
                     legendItems.push({
                         text: (!chart.legend.hideAll || typeof chart.legend.hideAll === 'undefined') ? 'HIDE ALL' : 'SHOW ALL',
-                        fontColor: color,
+                        fontColor: QwQ.color.primary,
                         fillStyle: QwQ.color.primary, // Box color
                         strokeStyle: QwQ.color.primary, // LineCollor around box
                     });
@@ -187,7 +187,7 @@ export default function AllGaugeChart() {
             <div>
                 <Line data={fdata} options={options} plugins={[htmlLegendPlugin]} className="responsive-chart" />
             </div>
-            <div id="legend-container" style={{ flexWrap: "wrap"}}></div>
+            <div id="legend-container" style={{ flexWrap: "wrap" }}></div>
         </>
     );
 }

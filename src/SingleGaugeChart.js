@@ -73,7 +73,7 @@ const options = {
         title: {
             display: true,
             color: font_color,
-            text: "All Gauge Votes"
+            text: ""
         },
         htmlLegend: {
             containerID: 'legend-container',
@@ -119,7 +119,7 @@ const options = {
 
                     legendItems.push({
                         text: (!chart.legend.hideAll || typeof chart.legend.hideAll === 'undefined') ? 'HIDE ALL' : 'SHOW ALL',
-                        fontColor: color,
+                        fontColor: QwQ.color.primary,
                         fillStyle: QwQ.color.primary, // Box color
                         strokeStyle: QwQ.color.primary, // LineCollor around box
                     });
@@ -150,6 +150,7 @@ const options = {
         },
         x: {
             ticks: {
+                display: false,
                 font: {
                     family: font_family
                 },
@@ -178,6 +179,7 @@ export default function SingleGaugeChart() {
                 .post("/", query, QwQ.headers)
                 .then(function (response) {
                     setFData(format_gauge_data(response.data, params));
+                    options.plugins.title.text = "Gauge "+params.id;
                     setGaugeId(params.id);
                 })
                 .catch((err) => {
