@@ -1,3 +1,23 @@
+export const chain_color = {
+    "Polygon": "#6a0dad",
+    "Fantom": "#0000ff"
+}
+
+export function stringChainToColour(str) {
+    var hash = 0;
+    str = str.split("(")[1].split(")")[0];
+    let colour = "";
+
+    if (chain_color[str] !== undefined) {
+        console.log(chain_color[str]);
+        colour = chain_color[str];
+    }
+    else {
+        colour = "#FFFFFF";
+    }
+
+    return colour;
+}
 export function stringToColour(str) {
     var hash = 0;
     for (let i = 0; i < str.length; i++) {
