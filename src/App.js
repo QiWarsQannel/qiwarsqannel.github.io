@@ -21,7 +21,7 @@ function App() {
 
               </Col>
               <Col style={{ textAlign: "end" }}>
-                <NavLink to="/">All Gauges</NavLink>
+                <NavLink to="/">Gauges</NavLink>
                 <NavLink to="/qipowah">Qipowah</NavLink>
               </Col>
             </Row>

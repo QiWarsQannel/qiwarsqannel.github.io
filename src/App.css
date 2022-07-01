@@ -17,7 +17,7 @@ header a {
 }
 .responsive-chart {
   min-height: 80vh;
-  width: 100% !important;
+  min-width: 100% !important;
 }
 .navbar {
   display: flex;
