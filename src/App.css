@@ -16,7 +16,8 @@ header a {
   color: #61dafb;
 }
 .responsive-chart {
-  min-height: 50vmin;
+  min-height: 80vh;
+  margin-bottom: 1em;
   min-width: 100% !important;
   max-width: 100% !important;
 }
