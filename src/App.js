@@ -4,7 +4,7 @@ import { Container, Row, Col } from "react-grid-system";
 import AllGaugeChart from './AllGaugeChart';
 import TotalVotesChart from './TotalVotesChart';
 import SingleGaugeChart from './SingleGaugeChart';
-import { HashRouter, Routes, Route, NavLink } from 'react-router-dom';
+import { HashRouter, Routes, Route, NavLink, Link } from 'react-router-dom';
 import { setup } from 'axios-cache-adapter';
 import QwQ from './QwQ';
 
@@ -42,14 +42,14 @@ function App() {
           <header className="App-header">
             <Row align="center" justify="end">
               <Col xs={12} lg={6}>
-                <h1 className="logo">Qi Wars Qannel</h1>
+                <h1 className="logo"><Link to="/">Qi Wars Qannel</Link></h1>
               </Col>
               <Col xs={12} lg={6} style={{ textAlign: "end" }}>
                 <div className="dropdown">
                   <NavLink to="/">Gauges</NavLink>
                   <ul>
                     {[...Array(numGauges)].map((x, i) =>
-                      <li>
+                      <li key={i}>
                         <NavLink to={"/gauge/"+(i+1)}>Gauge {i+1}</NavLink>
                       </li>
                     )}
