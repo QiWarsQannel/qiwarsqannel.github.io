@@ -5,6 +5,29 @@ header a {
   margin-left: 1em;
   color: white
 }
+.dropdown a {
+  margin-left: 0;
+}
+.dropdown {
+  display: inline-block;
+}
+.dropdown ul {
+  display: none;
+  position: absolute;
+  padding: 0;
+  margin: 0;
+  z-index: 999;
+  text-align: left;
+  background-color: #333;
+  padding: 0.5em 1em;
+}
+.dropdown li {
+  list-style: none;
+  font-size: 18px;
+}
+.dropdown:hover ul {
+  display: block;
+}
 .qimp, .active {
   color: #e24c54;
 }
@@ -14,6 +37,10 @@ header a {
 
 .App-link {
   color: #61dafb;
+}
+
+.App-header {
+  margin: 1em 0;
 }
 .responsive-chart {
   min-height: 80vh;

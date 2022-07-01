@@ -4,7 +4,6 @@ export const chain_color = {
 }
 
 export function stringChainToColour(str) {
-    var hash = 0;
     str = str.split("(")[1].split(")")[0];
     let colour = "";
 
