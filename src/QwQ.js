@@ -100,9 +100,9 @@ export const htmlLegendPlugin = {
             boxSpan.style.borderWidth = item.lineWidth + 'px';
             boxSpan.style.borderStyle = 'solid'
             boxSpan.style.display = 'inline-block';
-            boxSpan.style.height = '20px';
+            boxSpan.style.height = '12px';
             boxSpan.style.marginRight = '10px';
-            boxSpan.style.width = '20px';
+            boxSpan.style.width = '12px';
 
             // Text
             const textContainer = document.createElement('p');
