@@ -32,9 +32,3 @@
   min-height: 80vh;
   width: 100% !important;
 }
-@media (max-width: 500px) {
-  .responsive-chart {
-    min-height: 250vh;
-    width: 100% !important;
-  }
-}
