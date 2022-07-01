@@ -16,8 +16,9 @@ header a {
   color: #61dafb;
 }
 .responsive-chart {
-  min-height: 80vh;
+  min-height: 50vmin;
   min-width: 100% !important;
+  max-width: 100% !important;
 }
 .navbar {
   display: flex;

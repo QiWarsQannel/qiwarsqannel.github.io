@@ -9,17 +9,13 @@ function App() {
   return (
     <div className="App">
       <HashRouter>
-        <Container>
+        <Container style={{width: "100vw"}}>
           <header className="App-header">
             <Row align="center" justify="end">
-
-              <Col>
-
+              <Col xs={12} lg={6}>
                 <h1 className="logo">Qi Wars Qannel</h1>
-                <small><span className="table">&#x253B;&#x2501;&#x253B;</span> &#xFE35; <span className="qimp">&#x10DA;(QwQ&#x10DA;)</span></small>
-
               </Col>
-              <Col style={{ textAlign: "end" }}>
+              <Col xs={12} lg={6} style={{ textAlign: "end" }}>
                 <NavLink to="/">Gauges</NavLink>
                 <NavLink to="/qipowah">Qipowah</NavLink>
               </Col>
@@ -31,12 +27,13 @@ function App() {
                 <Route path="/" element={<AllGaugeChart />} />
                 <Route path="/qipowah" element={<TotalVotesChart />} />
               </Routes>
-
             </Col>
           </Row>
         </Container>
-
       </HashRouter>
+      <footer style={{padding: "1em", marginTop:"1em"}}>
+        <center><small><span className="table">&#x253B;&#x2501;&#x253B;</span> &#xFE35; <span className="qimp">&#x10DA;(QwQ&#x10DA;)</span></small></center>
+      </footer>
     </div >
   );
 }
