@@ -11,6 +11,7 @@ import {
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import { setup } from 'axios-cache-adapter'
+import QwQ, { stringToColour, htmlLegendPlugin } from "./QwQ";
 
 // eslint-disable-next-line
 Array.prototype.pushIfNotIncluded = function (element) {
@@ -30,19 +31,6 @@ ChartJS.register(
 );
 
 function format_gauge_data(input) {
-    var stringToColour = function (str) {
-        var hash = 0;
-        for (let i = 0; i < str.length; i++) {
-            hash = str.charCodeAt(i) + ((hash << 5) - hash);
-        }
-        var colour = '#';
-        for (let i = 0; i < 3; i++) {
-            var value = (hash >> (i * 8)) & 0xFF;
-            colour += ('00' + value.toString(16)).substr(-2);
-        }
-        return colour;
-    }
-
     let ar = input["data"]["proposals"];
     var result = {};
     var labels = [];
@@ -65,30 +53,13 @@ function format_gauge_data(input) {
     return result
 }
 
-const font_color = "#FFFFFF";
-const font_family = 'monospace';
+const font_color = QwQ.color.chart;
+const font_family = QwQ.font.chart;
 
 const query = {
-    query: `query {
-      proposals (
-        first: 999,
-        where: {
-          space: "qidao.eth",
-          title_contains: "Vault Incentives Gauge",
-          created_gte: 1641442262
-        },
-        orderBy: "created",
-        orderDirection: asc
-      ) {
-        scores_total
-        choices
-        scores
-      }
-    }`,
+    query: QwQ.graphql.ALL_GAUGE_VOTES,
     variables: {}
 };
-
-const defaultLegendClickHandler = ChartJS.defaults.plugins.legend.onClick;
 
 const options = {
     responsive: true,
@@ -105,40 +76,12 @@ const options = {
             color: font_color,
             text: "All Gauge Votes"
         },
+        htmlLegend: {
+            containerID: 'legend-container',
+        },
         legend: {
+            display: false,
             position: "bottom",
-            onClick: (evt, legendItem, legend) => {
-                let allLegendItemsState = [];
-
-                if (legendItem.text === 'HIDE ALL' || legendItem.text === 'SHOW ALL') {
-                    if (typeof legend.hideAll === 'undefined') {
-                        legend.hideAll = false;
-                    }
-
-                    legend.chart.data.datasets.forEach((dataset, i) => {
-                        legend.chart.setDatasetVisibility(i, legend.hideAll)
-                    });
-
-                    legend.hideAll = !legend.hideAll;
-                    legend.chart.update();
-
-                    return;
-                }
-
-
-                defaultLegendClickHandler(evt, legendItem, legend);
-
-
-                allLegendItemsState = legend.chart.data.datasets.map((e, i) => (legend.chart.getDatasetMeta(i).hidden));
-
-                if (allLegendItemsState.every(el => !el)) {
-                    legend.hideAll = false;
-                    legend.chart.update();
-                } else if (allLegendItemsState.every(el => el)) {
-                    legend.hideAll = true;
-                    legend.chart.update();
-                }
-            },
             labels: {
                 font: {
                     family: font_family
@@ -174,11 +117,12 @@ const options = {
                         };
                     });
 
+
                     legendItems.push({
                         text: (!chart.legend.hideAll || typeof chart.legend.hideAll === 'undefined') ? 'HIDE ALL' : 'SHOW ALL',
                         fontColor: color,
-                        fillStyle: 'white', // Box color
-                        strokeStyle: 'white', // LineCollor around box
+                        fillStyle: QwQ.color.primary, // Box color
+                        strokeStyle: QwQ.color.primary, // LineCollor around box
                     });
 
                     return legendItems;
@@ -199,6 +143,9 @@ const options = {
                 callback: function (value, index, values) {
                     return value + " %";
                 }
+            },
+            grid: {
+                color: QwQ.color.grid
             }
         },
         x: {
@@ -207,25 +154,15 @@ const options = {
                     family: font_family
                 },
                 color: font_color
+            },
+            grid: {
+                color: QwQ.color.grid
             }
         }
     }
 };
 
-const headers = {
-    headers: {
-        'Content-Type': 'application/json'
-    }
-};
-const api = setup({
-    baseURL: "https://hub.snapshot.org/graphql",
-
-    cache: {
-        exclude: {
-            methods: ['put', 'patch', 'delete']
-        }
-    }
-});
+const api = setup(QwQ.api_setup);
 
 
 export default function AllGaugeChart() {
@@ -235,7 +172,7 @@ export default function AllGaugeChart() {
     React.useEffect(() => {
         if (fdata.datasets.length === 0) {
             api
-                .post("/", query, headers)
+                .post("/", query, QwQ.headers)
                 .then(function (response) {
                     setFData(format_gauge_data(response.data));
                 })
@@ -247,7 +184,10 @@ export default function AllGaugeChart() {
 
     return (
         <>
-            <Line data={fdata} options={options} className="responsive-chart" />
+            <div>
+                <Line data={fdata} options={options} plugins={[htmlLegendPlugin]} className="responsive-chart" />
+            </div>
+            <div id="legend-container" style={{ flexWrap: "wrap"}}></div>
         </>
     );
 }

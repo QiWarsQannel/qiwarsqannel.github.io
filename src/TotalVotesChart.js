@@ -11,6 +11,7 @@ import {
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import { setup } from 'axios-cache-adapter'
+import QwQ from "./QwQ";
 
 // eslint-disable-next-line
 Array.prototype.pushIfNotIncluded = function (element) {
@@ -30,18 +31,7 @@ ChartJS.register(
 );
 
 function format_gauge_data(input) {
-    var stringToColour = function (str) {
-        var hash = 0;
-        for (let i = 0; i < str.length; i++) {
-            hash = str.charCodeAt(i) + ((hash << 5) - hash);
-        }
-        var colour = '#';
-        for (let i = 0; i < 3; i++) {
-            var value = (hash >> (i * 8)) & 0xFF;
-            colour += ('00' + value.toString(16)).substr(-2);
-        }
-        return colour;
-    }
+
 
     let ar = input["data"]["proposals"];
     var result = {};
@@ -55,34 +45,17 @@ function format_gauge_data(input) {
 
     }
     result["labels"] = labels;
-    result["datasets"] = [{ data: Object.values(r), label: "Total", fill: false, borderColor: "#FFFFFF", hidden: false }];
+    result["datasets"] = [{ data: Object.values(r), label: "Total", fill: false, borderColor: QwQ.color.primary, hidden: false }];
     return result
 }
 
-const font_color = "#FFFFFF";
-const font_family = 'monospace';
+const font_color = QwQ.color.chart;
+const font_family = QwQ.font.chart;
 
 const query = {
-    query: `query {
-      proposals (
-        first: 999,
-        where: {
-          space: "qidao.eth",
-          title_contains: "Vault Incentives Gauge",
-          created_gte: 1641442262
-        },
-        orderBy: "created",
-        orderDirection: asc
-      ) {
-        scores_total
-        choices
-        scores
-      }
-    }`,
+    query: QwQ.graphql.ALL_GAUGE_VOTES,
     variables: {}
 };
-
-const defaultLegendClickHandler = ChartJS.defaults.plugins.legend.onClick;
 
 const options = {
     responsive: true,
@@ -115,6 +88,9 @@ const options = {
                     family: font_family
                 },
 
+            },
+            grid: {
+                color: QwQ.color.grid
             }
         },
         x: {
@@ -123,25 +99,15 @@ const options = {
                     family: font_family
                 },
                 color: font_color
+            },
+            grid: {
+                color: QwQ.color.grid
             }
         }
     }
 };
 
-const headers = {
-    headers: {
-        'Content-Type': 'application/json'
-    }
-};
-const api = setup({
-    baseURL: "https://hub.snapshot.org/graphql",
-
-    cache: {
-        exclude: {
-            methods: ['put', 'patch', 'delete']
-        }
-    }
-});
+const api = setup(QwQ.api_setup);
 
 
 export default function TotalVotesChart() {
@@ -151,7 +117,7 @@ export default function TotalVotesChart() {
     React.useEffect(() => {
         if (fdata.datasets.length === 0) {
             api
-                .post("/", query, headers)
+                .post("/", query, QwQ.headers)
                 .then(function (response) {
                     setFData(format_gauge_data(response.data));
                 })
