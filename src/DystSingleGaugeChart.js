@@ -177,13 +177,14 @@ const options = {
 const api = setup(QwQ.api_setup);
 
 
-export default function DystSingleGaugeChart() {
+export default function DystSingleGaugeChart(props) {
 
     let params = useParams();
 
     const [fdata, setFData] = React.useState({ datasets: [] });
     const [gaugeId, setGaugeId] = React.useState();
-
+    const legends = props.legends;
+    
     React.useEffect(() => {
         if ((fdata.datasets.length === 0) || (params.id !== gaugeId)) {
             api
@@ -204,7 +205,7 @@ export default function DystSingleGaugeChart() {
             <div>
                 <Bar data={fdata} options={options} plugins={[htmlLegendPlugin]} className="responsive-chart" />
             </div>
-            <div id="legend-container-dyst-single" style={{ flexWrap: "wrap" }}></div>
+            {legends ? <div id="legend-container-dyst-single" style={{ flexWrap: "wrap" }}></div>  :<div id="legend-container-dyst-single" style={{ display: "none" }}></div>}
         </>
     );
 }

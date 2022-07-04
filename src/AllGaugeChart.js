@@ -169,7 +169,6 @@ export default function AllGaugeChart(props) {
 
     const [fdata, setFData] = React.useState({ datasets: [] });
     const legends = props.legends;
-    console.log(props);
 
     React.useEffect(() => {
         if (fdata.datasets.length === 0) {
