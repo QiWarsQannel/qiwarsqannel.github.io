@@ -9,7 +9,6 @@ import {
     Legend,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
-import { setup } from 'axios-cache-adapter';
 import { useParams } from 'react-router-dom';
 import QwQ, { stringToColour, htmlLegendPlugin } from "./QwQ";
 
@@ -163,7 +162,7 @@ const options = {
     }
 };
 
-const api = setup(QwQ.api_setup);
+var api=null;
 
 
 export default function SingleGaugeChart(props) {
@@ -173,6 +172,7 @@ export default function SingleGaugeChart(props) {
     const [fdata, setFData] = React.useState({ datasets: [] });
     const [gaugeId, setGaugeId] = React.useState();
     const legends = props.legends;
+    api=props.api;
 
     React.useEffect(() => {
         if ((fdata.datasets.length === 0) || (params.id !== gaugeId)) {

@@ -10,7 +10,6 @@ import {
     Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import { setup } from 'axios-cache-adapter'
 import QwQ, { stringToColour, htmlLegendPlugin } from "./QwQ";
 
 // eslint-disable-next-line
@@ -162,13 +161,14 @@ const options = {
     }
 };
 
-const api = setup(QwQ.api_setup);
+var api = null;
 
 
 export default function AllGaugeChart(props) {
 
     const [fdata, setFData] = React.useState({ datasets: [] });
     const legends = props.legends;
+    api=props.api;
 
     React.useEffect(() => {
         if (fdata.datasets.length === 0) {

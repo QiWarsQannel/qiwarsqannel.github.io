@@ -97,21 +97,21 @@ function App() {
                       <Row>
                         <Col xs={12} lg={6}>
                           <h4 className="center">Vault Incentive Gauge</h4>
-                          <AllGaugeChart />
+                          <AllGaugeChart api={api} />
                         </Col>
                         <Col xs={12} lg={6}>
                           <h4 className="center">Dystopia veDYST Rounds</h4>
-                          <DystAllGaugeChart />
+                          <DystAllGaugeChart api={api} />
                         </Col>
                       </Row>
                     </Container>
                   </>
                 } />
-                <Route path="/qipowah" element={<TotalVotesChart legends />} />
-                <Route path="/gauge" element={<AllGaugeChart legends />} />
-                <Route path="/gauge/:id" element={<SingleGaugeChart legends />} />
-                <Route path="/dyst" element={<DystAllGaugeChart legends />} />
-                <Route path="/dyst/:id" element={<DystSingleGaugeChart legends />} />
+                <Route path="/qipowah" element={<TotalVotesChart legends api={api} />} />
+                <Route path="/gauge" element={<AllGaugeChart legends api={api} />} />
+                <Route path="/gauge/:id" element={<SingleGaugeChart legends api={api} />} />
+                <Route path="/dyst" element={<DystAllGaugeChart legends api={api} />} />
+                <Route path="/dyst/:id" element={<DystSingleGaugeChart legends api={api} />} />
               </Routes>
             </Col>
           </Row>
