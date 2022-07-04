@@ -76,7 +76,7 @@ const options = {
             text: ""
         },
         htmlLegend: {
-            containerID: 'legend-container',
+            containerID: 'legend-container-single',
         },
         legend: {
             display: false,
@@ -193,7 +193,7 @@ export default function SingleGaugeChart() {
             <div>
                 <Bar data={fdata} options={options} plugins={[htmlLegendPlugin]} className="responsive-chart" />
             </div>
-            <div id="legend-container" style={{ flexWrap: "wrap" }}></div>
+            <div id="legend-container-single" style={{ flexWrap: "wrap" }}></div>
         </>
     );
 }

@@ -165,9 +165,11 @@ const options = {
 const api = setup(QwQ.api_setup);
 
 
-export default function AllGaugeChart() {
+export default function AllGaugeChart(props) {
 
     const [fdata, setFData] = React.useState({ datasets: [] });
+    const legends = props.legends;
+    console.log(props);
 
     React.useEffect(() => {
         if (fdata.datasets.length === 0) {
@@ -187,7 +189,7 @@ export default function AllGaugeChart() {
             <div>
                 <Line data={fdata} options={options} plugins={[htmlLegendPlugin]} className="responsive-chart" />
             </div>
-            <div id="legend-container" style={{ flexWrap: "wrap" }}></div>
+            {legends ? <div id="legend-container" style={{ flexWrap: "wrap" }}></div>  :<div id="legend-container" style={{ display: "none" }}></div>}
         </>
     );
 }

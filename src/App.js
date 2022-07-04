@@ -4,6 +4,8 @@ import { Container, Row, Col } from "react-grid-system";
 import AllGaugeChart from './AllGaugeChart';
 import TotalVotesChart from './TotalVotesChart';
 import SingleGaugeChart from './SingleGaugeChart';
+import DystAllGaugeChart from './DystAllGaugeChart';
+import DystSingleGaugeChart from './DystSingleGaugeChart';
 import { HashRouter, Routes, Route, NavLink, Link } from 'react-router-dom';
 import { setup } from 'axios-cache-adapter';
 import QwQ from './QwQ';
@@ -17,10 +19,15 @@ const query = {
   query: QwQ.graphql.ALL_GAUGE_VOTES,
   variables: {}
 };
+const dquery = {
+  query: QwQ.graphql.DYST_ALL_GAUGE_VOTES,
+  variables: {}
+};
 
 function App() {
 
   const [numGauges, setNumGauges] = React.useState();
+  const [numDystGauges, setNumDystGauges] = React.useState();
 
   React.useEffect(() => {
     if (!numGauges) {
@@ -33,7 +40,17 @@ function App() {
           console.error("ops! ocorreu um erro" + err);
         });
     }
-  }, [numGauges]);
+    if (!numDystGauges) {
+      api
+        .post("/", dquery, QwQ.headers)
+        .then(function (response) {
+          setNumDystGauges(count_gauges(response.data));
+        })
+        .catch((err) => {
+          console.error("ops! ocorreu um erro" + err);
+        });
+    }
+  }, [numGauges, numDystGauges]);
 
   return (
     <div className="App">
@@ -47,7 +64,7 @@ function App() {
               <Col xs={12} lg={6} style={{ textAlign: "end" }}>
                 <nav>
                   <div className="dropdown">
-                    <NavLink to="/">Gauges</NavLink>
+                    <NavLink to="/gauge">Vaults</NavLink>
                     <ul>
                       {[...Array(numGauges)].map((x, i) =>
                         <li key={i}>
@@ -56,7 +73,17 @@ function App() {
                       )}
                     </ul>
                   </div>
-                  <NavLink to="/qipowah">Qipowah</NavLink>
+                  <div className="dropdown">
+                    <NavLink to="/dyst">veDYST</NavLink>
+                    <ul>
+                      {[...Array(numDystGauges)].map((x, i) =>
+                        <li key={i}>
+                          <NavLink to={"/dyst/" + (i + 1)}>Round {i + 1}</NavLink>
+                        </li>
+                      )}
+                    </ul>
+                  </div>
+                  <NavLink to="/qipowah">eQI</NavLink>
                 </nav>
               </Col>
             </Row>
@@ -64,9 +91,27 @@ function App() {
           <Row>
             <Col>
               <Routes>
-                <Route path="/" element={<AllGaugeChart />} />
-                <Route path="/qipowah" element={<TotalVotesChart />} />
-                <Route path="/gauge/:id" element={<SingleGaugeChart />} />
+                <Route path="/" element={
+                  <>
+                    <Container>
+                      <Row>
+                        <Col xs={12} lg={6}>
+                          <h4 className="center">Vault Incentive Gauge</h4>
+                          <AllGaugeChart />
+                        </Col>
+                        <Col xs={12} lg={6}>
+                          <h4 className="center">Dystopia veDYST Rounds</h4>
+                          <DystAllGaugeChart />
+                        </Col>
+                      </Row>
+                    </Container>
+                  </>
+                } />
+                <Route path="/qipowah" element={<TotalVotesChart legends />} />
+                <Route path="/gauge" element={<AllGaugeChart legends />} />
+                <Route path="/gauge/:id" element={<SingleGaugeChart legends />} />
+                <Route path="/dyst" element={<DystAllGaugeChart legends />} />
+                <Route path="/dyst/:id" element={<DystSingleGaugeChart legends />} />
               </Routes>
             </Col>
           </Row>

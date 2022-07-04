@@ -15,6 +15,7 @@ header nav a {
 .dropdown {
   display: inline-block;
   position: relative;
+  margin-left: 1em;
 }
 .dropdown ul {
   display: none;
@@ -27,6 +28,7 @@ header nav a {
   text-align: left;
   background-color: #333;
   padding: 0.5em 1em;
+  text-align: center;
 }
 .dropdown li {
   list-style: none;
@@ -59,4 +61,7 @@ header nav a {
   display: flex;
   justify-content: flex-end;
   align-items: center;
+}
+.center {
+  text-align: center;
 }
