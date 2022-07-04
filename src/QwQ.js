@@ -159,6 +159,21 @@ export default class QwQ {
               choices
               scores
             }
+          }`,
+          DYST_ALL_GAUGE_VOTES: `query {
+            proposals (
+              first: 999,
+              where: {
+                space: "qidao.eth",
+                title_contains: "Dystopia veDYST"
+              },
+              orderBy: "created",
+              orderDirection: asc
+            ) {
+              scores_total
+              choices
+              scores
+            }
           }`
     }
     static color = {
