@@ -24,16 +24,16 @@ function App() {
 
   React.useEffect(() => {
     if (!numGauges) {
-        api
-            .post("/", query, QwQ.headers)
-            .then(function (response) {
-              setNumGauges(count_gauges(response.data));
-            })
-            .catch((err) => {
-                console.error("ops! ocorreu um erro" + err);
-            });
+      api
+        .post("/", query, QwQ.headers)
+        .then(function (response) {
+          setNumGauges(count_gauges(response.data));
+        })
+        .catch((err) => {
+          console.error("ops! ocorreu um erro" + err);
+        });
     }
-}, [numGauges]);
+  }, [numGauges]);
 
   return (
     <div className="App">
@@ -45,18 +45,19 @@ function App() {
                 <h1 className="logo"><Link to="/">Qi Wars Qannel</Link></h1>
               </Col>
               <Col xs={12} lg={6} style={{ textAlign: "end" }}>
-                <div className="dropdown">
-                  <NavLink to="/">Gauges</NavLink>
-                  <ul>
-                    {[...Array(numGauges)].map((x, i) =>
-                      <li key={i}>
-                        <NavLink to={"/gauge/"+(i+1)}>Gauge {i+1}</NavLink>
-                      </li>
-                    )}
-                  </ul>
-                </div>
-                <NavLink to="/qipowah">Qipowah</NavLink>
-
+                <nav>
+                  <div className="dropdown">
+                    <NavLink to="/">Gauges</NavLink>
+                    <ul>
+                      {[...Array(numGauges)].map((x, i) =>
+                        <li key={i}>
+                          <NavLink to={"/gauge/" + (i + 1)}>Gauge {i + 1}</NavLink>
+                        </li>
+                      )}
+                    </ul>
+                  </div>
+                  <NavLink to="/qipowah">Qipowah</NavLink>
+                </nav>
               </Col>
             </Row>
           </header>

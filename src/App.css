@@ -1,19 +1,26 @@
 .logo {
   margin: 0;
 }
-header a {
+.logo a {
+  color: #e24c54 !important;
+}
+
+header nav a {
   margin-left: 1em;
-  color: white
+  color: white;
 }
 .dropdown a {
   margin-left: 0;
 }
 .dropdown {
   display: inline-block;
+  position: relative;
 }
 .dropdown ul {
   display: none;
   position: absolute;
+  left: -1em;
+  right: -1em;
   padding: 0;
   margin: 0;
   z-index: 999;
@@ -23,7 +30,7 @@ header a {
 }
 .dropdown li {
   list-style: none;
-  font-size: 18px;
+  font-size: 16px;
 }
 .dropdown:hover ul {
   display: block;
