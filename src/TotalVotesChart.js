@@ -10,7 +10,6 @@ import {
 
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import { setup } from 'axios-cache-adapter'
 import QwQ from "./QwQ";
 
 // eslint-disable-next-line
@@ -107,13 +106,14 @@ const options = {
     }
 };
 
-const api = setup(QwQ.api_setup);
+var api = null;
 
 
-export default function TotalVotesChart() {
+export default function TotalVotesChart(props) {
 
     const [fdata, setFData] = React.useState({ datasets: [] });
 
+    api=props.api;
     React.useEffect(() => {
         if (fdata.datasets.length === 0) {
             api
