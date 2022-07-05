@@ -28,6 +28,15 @@ export function stringToColour(str) {
     }
     return colour;
 }
+export function multidata_sort(a,b) {
+    let sa = a.data.reduce((partialSum, a) => partialSum + a, 0);
+    let da = a.data.filter(e => e !== null).length;
+    
+    let sb = b.data.reduce((partialSum, a) => partialSum + a, 0);
+    let db = b.data.filter(e => e !== null).length;
+
+    return (sb/db)-(sa/da);
+}
 
 const getOrCreateLegendList = (chart, id) => {
     const legendContainer = document.getElementById(id);

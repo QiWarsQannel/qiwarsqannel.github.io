@@ -10,7 +10,7 @@ import {
     Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import QwQ, { stringToColour, htmlLegendPlugin } from "./QwQ";
+import QwQ, { stringToColour, htmlLegendPlugin, multidata_sort } from "./QwQ";
 
 // eslint-disable-next-line
 Array.prototype.pushIfNotIncluded = function (element) {
@@ -59,6 +59,7 @@ function format_gauge_data(input) {
     }
     result["labels"] = labels;
     result["datasets"] = Object.values(r);
+    result.datasets.sort(multidata_sort);
     return result
 }
 
