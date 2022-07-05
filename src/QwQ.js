@@ -8,7 +8,6 @@ export function stringChainToColour(str) {
     let colour = "";
 
     if (chain_color[str] !== undefined) {
-        console.log(chain_color[str]);
         colour = chain_color[str];
     }
     else {
@@ -95,11 +94,9 @@ export const htmlLegendPlugin = {
 
                 if (allLegendItemsState.every(el => !el)) {
                     chart.legend.hideAll = false;
-                    console.log("foi");
                     chart.update();
 
                 } else if (allLegendItemsState.every(el => el)) {
-                    console.log("foi2");
                     chart.legend.hideAll = true;
                     chart.update();
                 }

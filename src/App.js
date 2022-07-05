@@ -3,6 +3,7 @@ import './App.css';
 import { Container, Row, Col } from "react-grid-system";
 import AllGaugeChart from './AllGaugeChart';
 import TotalVotesChart from './TotalVotesChart';
+import TotalDystVotesChart from './TotalDystVotesChart';
 import SingleGaugeChart from './SingleGaugeChart';
 import DystAllGaugeChart from './DystAllGaugeChart';
 import DystSingleGaugeChart from './DystSingleGaugeChart';
@@ -66,6 +67,9 @@ function App() {
                   <div className="dropdown">
                     <NavLink to="/gauge">Vaults</NavLink>
                     <ul>
+                      <li key="0">
+                        <NavLink to="/gauge/eqi">eQI</NavLink>
+                      </li>
                       {[...Array(numGauges)].map((x, i) =>
                         <li key={i}>
                           <NavLink to={"/gauge/" + (i + 1)}>Gauge {i + 1}</NavLink>
@@ -76,6 +80,9 @@ function App() {
                   <div className="dropdown">
                     <NavLink to="/dyst">veDYST</NavLink>
                     <ul>
+                      <li key="0">
+                        <NavLink to="/dyst/eqi">eQI</NavLink>
+                      </li>
                       {[...Array(numDystGauges)].map((x, i) =>
                         <li key={i}>
                           <NavLink to={"/dyst/" + (i + 1)}>Round {i + 1}</NavLink>
@@ -83,7 +90,6 @@ function App() {
                       )}
                     </ul>
                   </div>
-                  <NavLink to="/qipowah">eQI</NavLink>
                 </nav>
               </Col>
             </Row>
@@ -107,10 +113,11 @@ function App() {
                     </Container>
                   </>
                 } />
-                <Route path="/qipowah" element={<TotalVotesChart legends api={api} />} />
                 <Route path="/gauge" element={<AllGaugeChart legends api={api} />} />
+                <Route path="/gauge/eqi" element={<TotalVotesChart legends api={api} />} />
                 <Route path="/gauge/:id" element={<SingleGaugeChart legends api={api} />} />
                 <Route path="/dyst" element={<DystAllGaugeChart legends api={api} />} />
+                <Route path="/dyst/eqi" element={<TotalDystVotesChart legends api={api} />} />
                 <Route path="/dyst/:id" element={<DystSingleGaugeChart legends api={api} />} />
               </Routes>
             </Col>
