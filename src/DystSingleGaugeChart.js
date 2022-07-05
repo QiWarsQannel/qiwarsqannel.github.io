@@ -59,6 +59,7 @@ function format_gauge_data(input, p) {
 
     result["labels"] = labels;
     result["datasets"] = Object.values(r);
+    result.datasets.sort((a,b) => b.data[0] - a.data[0]);
     return result
 }
 
