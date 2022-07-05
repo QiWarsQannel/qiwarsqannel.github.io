@@ -65,3 +65,22 @@ header nav a {
 .center {
   text-align: center;
 }
+
+table {
+  width: 100%;
+  font-size: 14px;
+}
+table a {
+  color: white;
+}
+table thead {
+  color: #e24c54;
+}
+table td, table th {
+  border: 1px solid gray;
+}
+
+tbody td {
+  text-align: right;
+
+}

@@ -10,6 +10,7 @@ import DystSingleGaugeChart from './DystSingleGaugeChart';
 import { HashRouter, Routes, Route, NavLink, Link } from 'react-router-dom';
 import { setup } from 'axios-cache-adapter';
 import QwQ from './QwQ';
+import QiBuyBacks from './QiBuyBacks';
 
 function count_gauges(input) {
   return input["data"]["proposals"].length;
@@ -119,6 +120,9 @@ function App() {
                 <Route path="/dyst" element={<DystAllGaugeChart legends api={api} />} />
                 <Route path="/dyst/eqi" element={<TotalDystVotesChart legends api={api} />} />
                 <Route path="/dyst/:id" element={<DystSingleGaugeChart legends api={api} />} />
+
+                <Route path="/buybacks" element={<QiBuyBacks />} />
+
               </Routes>
             </Col>
           </Row>
