@@ -17,7 +17,7 @@ export default function Address(props) {
         <>
             <span style={style}>
                 <MediaQuery maxWidth={truncate_size}>
-                    {truncateEthAddress(children)}
+                    <abbr title={children}>{truncateEthAddress(children)}</abbr>
                 </MediaQuery>
                 <MediaQuery minWidth={truncate_size + 1}>
                     {children}
