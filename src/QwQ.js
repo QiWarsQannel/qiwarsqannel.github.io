@@ -28,14 +28,17 @@ export function stringToColour(str) {
     }
     return colour;
 }
-export function multidata_sort(a,b) {
+export function numberWithCommas(x) {
+    return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+}
+export function multidata_sort(a, b) {
     let sa = a.data.reduce((partialSum, a) => partialSum + a, 0);
     let da = a.data.filter(e => e !== null).length;
-    
+
     let sb = b.data.reduce((partialSum, a) => partialSum + a, 0);
     let db = b.data.filter(e => e !== null).length;
 
-    return (sb/db)-(sa/da);
+    return (sb / db) - (sa / da);
 }
 
 const getOrCreateLegendList = (chart, id) => {
@@ -166,7 +169,7 @@ export default class QwQ {
               scores
             }
           }`,
-          DYST_ALL_GAUGE_VOTES: `query {
+        DYST_ALL_GAUGE_VOTES: `query {
             proposals (
               first: 999,
               where: {
