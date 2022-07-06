@@ -91,6 +91,14 @@ function App() {
                       )}
                     </ul>
                   </div>
+                  <div className="dropdown">
+                    <u>Tools</u>
+                    <ul>
+                      <li key="0">
+                        <NavLink to="/buybacks">Buybacks</NavLink>
+                      </li>
+                    </ul>
+                  </div>
                 </nav>
               </Col>
             </Row>

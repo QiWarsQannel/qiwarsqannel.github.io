@@ -9,6 +9,12 @@ header nav a {
   margin-left: 1em;
   color: white;
 }
+header nav u {
+  cursor: pointer;
+}
+nav * {
+  text-decoration-color: #e24c54;
+}
 .dropdown a {
   margin-left: 0;
 }
@@ -79,10 +85,22 @@ table svg {
   margin-left: 5px;
 }
 table thead {
-  color: #e24c54;
+  color: #fff;
 }
-table td, table th {
+table thead tr {
+  background: #333;
+}
+table th {
+  border: 1px solid #333;
+}
+table td {
   border: 1px solid gray;
+}
+table .fresh td {
+  border-color: #6ce24c;
+}
+small.fresh {
+  color: #6ce24c;
 }
 
 tbody td {
