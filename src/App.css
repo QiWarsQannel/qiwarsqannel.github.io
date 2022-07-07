@@ -94,10 +94,10 @@ table th {
   border: 1px solid #333;
 }
 table td {
-  border: 1px solid gray;
+  border: 1px solid #808080;
 }
 table .fresh td {
-  border-color: #6ce24c;
+  border-color: inherit;
 }
 small.fresh {
   color: #6ce24c;

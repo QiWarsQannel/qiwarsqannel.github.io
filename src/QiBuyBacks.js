@@ -1,7 +1,7 @@
 import { useMoralisQuery } from "react-moralis";
 import { BsBoxArrowUpRight } from 'react-icons/bs';
 import Address from './Address.js';
-import { numberWithCommas } from "./QwQ.js";
+import { numberWithCommas, mix_color } from "./QwQ.js";
 
 
 
@@ -11,7 +11,7 @@ export default function QiBuyBacks(props) {
     const getData = data => data;
     const sorted_data = [...getData(data)].sort((a, b) => b.attributes.block_number - a.attributes.block_number);
     const today = new Date();
-
+    
     return (
         <>
         <h4 className="center">QI Buybacks</h4>
@@ -27,7 +27,7 @@ export default function QiBuyBacks(props) {
             </thead>
             <tbody>
                 {sorted_data.map((x, i) =>
-                    <tr key={i} className={((((today - x.attributes.block_timestamp)/60000)/60)/24) <= 7? "fresh" : "" }>
+                    <tr key={i} style={((((today - x.attributes.block_timestamp)/60000)/60)/24) <= 7? {borderColor: mix_color("6ce24c","808080",100-((((((today - x.attributes.block_timestamp)/60000)/60)/24)*100)/7))} : {} } className={((((today - x.attributes.block_timestamp)/60000)/60)/24) <= 7? "fresh" : "" }>
                         <td>{numberWithCommas(parseFloat(x.attributes.decimal.value.$numberDecimal).toFixed(2))}</td>
                         <td><Address color>{x.attributes.from_address}</Address></td>
                         <td>{x.attributes.block_number}</td>
