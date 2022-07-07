@@ -7,6 +7,8 @@ import { numberWithCommas, mix_color } from "./QwQ.js";
 
 export default function QiBuyBacks(props) {
 
+    const fresh_threshold = 7;
+    const fresh_color = "6ce24c";
     const { data } = useMoralisQuery("PolygonTokenTransfers", (query) => query.equalTo("to_address", "0x1d8a6b7941ef1349c1b5e378783cd56b001ecfbc").equalTo("token_address", "0x580a84c73811e1839f75d86d75d88cca0c241ff4").limit(500));
     const getData = data => data;
     const sorted_data = [...getData(data)].sort((a, b) => b.attributes.block_number - a.attributes.block_number);
@@ -27,7 +29,7 @@ export default function QiBuyBacks(props) {
             </thead>
             <tbody>
                 {sorted_data.map((x, i) =>
-                    <tr key={i} style={((((today - x.attributes.block_timestamp)/60000)/60)/24) <= 7? {borderColor: mix_color("6ce24c","808080",100-((((((today - x.attributes.block_timestamp)/60000)/60)/24)*100)/7))} : {} } className={((((today - x.attributes.block_timestamp)/60000)/60)/24) <= 7? "fresh" : "" }>
+                    <tr key={i} style={((((today - x.attributes.block_timestamp)/60000)/60)/24) <= fresh_threshold? {borderColor: mix_color(fresh_color,"808080",100-((((((today - x.attributes.block_timestamp)/60000)/60)/24)*100)/fresh_threshold))} : {} } className={((((today - x.attributes.block_timestamp)/60000)/60)/24) <= fresh_threshold? "fresh" : "" }>
                         <td>{numberWithCommas(parseFloat(x.attributes.decimal.value.$numberDecimal).toFixed(2))}</td>
                         <td><Address color>{x.attributes.from_address}</Address></td>
                         <td>{x.attributes.block_number}</td>

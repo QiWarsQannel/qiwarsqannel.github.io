@@ -32,7 +32,6 @@ export function stringToColour(str) {
 export function mix_color(color_1, color_2, weight) {
     function d2h(d) { return d.toString(16); }  // convert a decimal value to hex
     function h2d(h) { return parseInt(h, 16); } // convert a hex value to decimal 
-    console.log(weight);
 
     weight = (typeof (weight) !== 'undefined') ? weight : 50; // set the weight to 50%, if that argument is omitted
 
