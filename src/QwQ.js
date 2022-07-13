@@ -184,7 +184,6 @@ export default class QwQ {
                 space: "qidao.eth",
                 title_contains: "Vault Incentives Gauge",
                 created_gte: 1641442262,
-                state: "closed"
               },
               orderBy: "created",
               orderDirection: asc
@@ -200,7 +199,6 @@ export default class QwQ {
               where: {
                 space: "qidao.eth",
                 title_contains: "Dystopia veDYST",
-                state: "closed"
               },
               orderBy: "created",
               orderDirection: asc
