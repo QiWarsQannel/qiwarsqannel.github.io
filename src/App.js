@@ -9,8 +9,10 @@ import DystAllGaugeChart from './DystAllGaugeChart';
 import DystSingleGaugeChart from './DystSingleGaugeChart';
 import { HashRouter, Routes, Route, NavLink, Link } from 'react-router-dom';
 import { setup } from 'axios-cache-adapter';
-import QwQ from './QwQ';
+import QwQ, { VAULT_NAMES } from './QwQ';
 import QiBuyBacks from './QiBuyBacks';
+import Liquidations from './Liquidations';
+import LiquidationsList from './LiquidationsList';
 
 function count_gauges(input) {
   return input["data"]["proposals"].length;
@@ -97,6 +99,9 @@ function App() {
                       <li key="0">
                         <NavLink to="/buybacks">Buybacks</NavLink>
                       </li>
+                      <li key="1">
+                        <NavLink to="/liq">Liquidations</NavLink>
+                      </li>
                     </ul>
                   </div>
                 </nav>
@@ -130,6 +135,11 @@ function App() {
                 <Route path="/dyst/:id" element={<DystSingleGaugeChart legends api={api} />} />
 
                 <Route path="/buybacks" element={<QiBuyBacks />} />
+
+                <Route path="/liq/" element={<LiquidationsList />} />
+                {VAULT_NAMES.POLYGON_ALL().map((x, i) =>
+                  <Route key={i} path={"/liq/" + x} element={<Liquidations collateral={x} />} />
+                )}
 
               </Routes>
             </Col>

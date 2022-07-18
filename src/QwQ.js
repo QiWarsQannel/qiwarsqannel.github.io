@@ -233,3 +233,37 @@ export default class QwQ {
         }
     }
 }
+
+export class VAULT_NAMES {
+    static POLYGON = {
+        "0x305f113ff78255d4f8524c8f50c7300b91b10f6a": "WMATIC",
+        "0x3fd939b017b31eaadf9ae50c7ff7fa5c0661d47c": "WETH",
+        "0xf086dedf6a89e7b16145b03a6cb0c0a9979f1433": "GHST",
+        "0x1f0aa72b980d65518e88841ba1da075bd43fa933": "vGHST",
+        "0x37131aedd3da288467b6ebe9a77c523a700e6ca1": "WBTC",
+        "0x61167073e31b1dad85a3e531211c7b8f1e5cae72": "LINK",
+        "0x87ee36f780ae843a78d5735867bc1c13792b7b11": "AAVE",
+        "0x98b5f32dd9670191568b661a3e847ed764943875": "CRV",
+        "0x701a1824e5574b0b6b1c8da808b184a7ab7a2867": "BAL",
+        "0x649aa6e6b6194250c077df4fb37c23ee6c098513": "dQUICK",
+        "0x88d84a85a87ed12b8f098e8953b322ff789fcd1a": "camWMATIC",
+        "0x11a33631a5b5349af3f165d2b7901a4d67e561ad": "camWETH",
+        "0x578375c3af7d61586c2c3a7ba87d2eed640efa40": "camAAVE",
+        "0x7dda5e1a389e0c1892caf55940f5fce6588a9ae0": "camWBTC",
+        "0xd2fe44055b5c874fee029119f70336447c8e8827": "camDAI",
+        "0x1dcc1f864a4bd0b8f4ad33594b758b68e9fa872c": "SAND",
+        "0x57cbf36788113237d64e46f25a88855c3dff1691": "SDAM3CRV",
+        "0xff2c44fb819757225a176e825255a01b3b8bb051": "FXS",
+        "0x7cbf49e4214c7200af986bc4aacf7bc79dd9c19a": "cxDOGE",
+        "0x506533b9c16ee2472a6bf37cc320ae45a0a24f11": "cxADA",
+        "0x7d36999a69f2b99bf3fb98866cbbe47af43696c8": "cxWETH",
+        "0x178f1c95c85fe7221c7a6a3d6f12b7da3253eeae": "CEL"
+    }
+    static POLYGON_ALL = function() {
+        let all = [];
+        Object.entries(this.POLYGON).forEach(function(x,i) {
+            all.push(x[1]);
+        })
+        return all;
+    }
+}

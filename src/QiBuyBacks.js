@@ -31,7 +31,7 @@ export default function QiBuyBacks(props) {
                 {sorted_data.map((x, i) =>
                     <tr key={i} style={((((today - x.attributes.block_timestamp)/60000)/60)/24) <= fresh_threshold? {borderColor: mix_color(fresh_color,"808080",100-((((((today - x.attributes.block_timestamp)/60000)/60)/24)*100)/fresh_threshold))} : {} } className={((((today - x.attributes.block_timestamp)/60000)/60)/24) <= fresh_threshold? "fresh" : "" }>
                         <td>{numberWithCommas(parseFloat(x.attributes.decimal.value.$numberDecimal).toFixed(2))}</td>
-                        <td><Address color>{x.attributes.from_address}</Address></td>
+                        <td><Address color copy>{x.attributes.from_address}</Address></td>
                         <td>{x.attributes.block_number}</td>
                         <td><a target="_blank" rel="noreferrer" href={"https://polygonscan.com/tx/" + x.attributes.transaction_hash}>{x.attributes.block_timestamp.toISOString().replace("T"," ").replace(".000Z","")}<BsBoxArrowUpRight/></a></td>
                     </tr>
