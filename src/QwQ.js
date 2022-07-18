@@ -259,9 +259,9 @@ export class VAULTS {
         "0x7d36999a69f2b99bf3fb98866cbbe47af43696c8": "cxWETH",
         "0x178f1c95c85fe7221c7a6a3d6f12b7da3253eeae": "CEL"
     }
-    static POLYGON_ALL = function() {
+    static POLYGON_ALL = function () {
         let all = [];
-        Object.entries(this.POLYGON).forEach(function(x,i) {
+        Object.entries(this.POLYGON).forEach(function (x, i) {
             all.push(x[1]);
         })
         return all;
@@ -271,19 +271,50 @@ export class VAULTS {
         "0xa56f9a54880afbc30cf29bb66d2d9adcdcaeadd6": "WBNB",
         "0x014a177e9642d1b4e970418f894985dc1b85657f": "CAKE"
     }
-    static BINANCE_ALL = function() {
+    static BINANCE_ALL = function () {
         let all = [];
-        Object.entries(this.BINANCE).forEach(function(x,i) {
+        Object.entries(this.BINANCE).forEach(function (x, i) {
+            all.push(x[1]);
+        })
+        return all;
+    }
+    static FANTOM = {
+        "0x1066b8fc999c1ee94241344818486d5f944331a0": "WFTM",
+        "0xd939c268c49c442f037e968f045ba02f499562d4": "WETH",
+        "0x7efb260662a6fa95c1ce1092c53ca23733202798": "yvWFTM",
+        "0x682e473fca490b0adfa7efe94083c1e63f28f034": "yvDAI",
+        "0x7ae52477783c4e3e5c1476bbb29a8d029c920676": "yvETH",
+        "0x571f42886c31f9b769ad243e81d06d0d144be7b4": "yvBTC",
+        "0x6d6029557a06961acc5f81e1fff5a474c54e32fd": "yvYFI",
+        "0xe5996a2cb60ea57f03bf332b5adc517035d8d094": "WBTC",
+        "0xd6488d586e8fcd53220e4804d767f19f5c846086": "LINK",
+        "0x267bdd1c19c932ce03c7a62bbe5b95375f9160a6": "SUSHI",
+        "0xdb09908b82499cadb9e6108444d5042f81569bd9": "AAVE",
+        "0x3609a304c6a41d87e895b9c1fd18c02ba989ba90": "mooScreamFTM",
+        "0xc1c7ef18abc94013f6c58c6cdf9e829a48075b4e": "mooScreamETH",
+        "0x5563cc1ee23c4b17c861418cff16641d46e12436": "mooScreamBTC",
+        "0x8e5e4d08485673770ab372c05f95081be0636fa2": "mooScreamLINK",
+        "0xbf0ff8ac03f3e0dd7d8faa9b571eba999a854146": "mooScreamDAI",
+        "0xf34e271312e41bbd7c451b76af2af8339d6f16ed": "mooBooBTCFTM",
+        "0x9ba01b1279b1f7152b42aca69faf756029a9abde": "mooBooETHFTM",
+        "0x75d4ab6843593c111eeb02ff07055009c836a1ef": "mooBIFI",
+        "0x3f6cf10e85e9c0630856599fab8d8bfcd9c0e7d4": "xBOO"
+    }
+    static FANTOM_ALL = function () {
+        let all = [];
+        Object.entries(this.FANTOM).forEach(function (x, i) {
             all.push(x[1]);
         })
         return all;
     }
     static SCAN_TX_URI = {
         "Polygon": "https://polygonscan.com/tx/",
-        "Binance": "https://bscscan.com/tx/"
+        "Binance": "https://bscscan.com/tx/",
+        "Fantom": "https://ftmscan.com/tx/"
     }
     static CHAIN = {
         "Polygon": this.POLYGON,
-        "Binance": this.BINANCE
+        "Binance": this.BINANCE,
+        "Fantom": this.FANTOM
     }
 }

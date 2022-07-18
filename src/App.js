@@ -145,6 +145,10 @@ function App() {
                   <Route key={i} path={"/liq/binance/" + x} element={<Liquidations chain="Binance" collateral={x} />} />
                 )}
 
+                {VAULTS.FANTOM_ALL().map((x, i) =>
+                  <Route key={i} path={"/liq/fantom/" + x} element={<Liquidations chain="Fantom" collateral={x} />} />
+                )}
+
               </Routes>
             </Col>
           </Row>
