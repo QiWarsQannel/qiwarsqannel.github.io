@@ -1,10 +1,10 @@
-import truncateEthAddress from 'truncate-eth-address';
-import { VAULT_NAMES, stringToColour } from './QwQ';
+import { VAULTS, stringToColour } from './QwQ';
 import Address from './Address';
 
 export default function Vault(props) {
     const children = props.children;
     const color = props.color;
+    const chain = props.chain;
     var truncate_size = 767;
     if (props.truncateMaxWidth) {
         truncate_size = props.truncateMaxWidth;
@@ -16,8 +16,8 @@ export default function Vault(props) {
     return (
         <>
             <span style={style}>
-                {VAULT_NAMES.POLYGON.hasOwnProperty(children) && VAULT_NAMES.POLYGON[children]}
-                {!VAULT_NAMES.POLYGON.hasOwnProperty(children) && <Address>{children}</Address>}
+                {VAULTS.CHAIN[chain].hasOwnProperty(children) && VAULTS.CHAIN[chain][children]}
+                {!VAULTS.CHAIN[chain].hasOwnProperty(children) && <Address>{children}</Address>}
             </span>
         </>
     );

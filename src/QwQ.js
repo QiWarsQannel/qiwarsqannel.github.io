@@ -234,7 +234,7 @@ export default class QwQ {
     }
 }
 
-export class VAULT_NAMES {
+export class VAULTS {
     static POLYGON = {
         "0x305f113ff78255d4f8524c8f50c7300b91b10f6a": "WMATIC",
         "0x3fd939b017b31eaadf9ae50c7ff7fa5c0661d47c": "WETH",
@@ -265,5 +265,25 @@ export class VAULT_NAMES {
             all.push(x[1]);
         })
         return all;
+    }
+    static BINANCE = {
+        "0x7333fd58d8d73a8e5fc1a16c8037ada4f580fa2b": "DODO",
+        "0xa56f9a54880afbc30cf29bb66d2d9adcdcaeadd6": "WBNB",
+        "0x014a177e9642d1b4e970418f894985dc1b85657f": "CAKE"
+    }
+    static BINANCE_ALL = function() {
+        let all = [];
+        Object.entries(this.BINANCE).forEach(function(x,i) {
+            all.push(x[1]);
+        })
+        return all;
+    }
+    static SCAN_TX_URI = {
+        "Polygon": "https://polygonscan.com/tx/",
+        "Binance": "https://bscscan.com/tx/"
+    }
+    static CHAIN = {
+        "Polygon": this.POLYGON,
+        "Binance": this.BINANCE
     }
 }

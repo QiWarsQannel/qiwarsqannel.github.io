@@ -9,7 +9,7 @@ import DystAllGaugeChart from './DystAllGaugeChart';
 import DystSingleGaugeChart from './DystSingleGaugeChart';
 import { HashRouter, Routes, Route, NavLink, Link } from 'react-router-dom';
 import { setup } from 'axios-cache-adapter';
-import QwQ, { VAULT_NAMES } from './QwQ';
+import QwQ, { VAULTS } from './QwQ';
 import QiBuyBacks from './QiBuyBacks';
 import Liquidations from './Liquidations';
 import LiquidationsList from './LiquidationsList';
@@ -137,8 +137,12 @@ function App() {
                 <Route path="/buybacks" element={<QiBuyBacks />} />
 
                 <Route path="/liq/" element={<LiquidationsList />} />
-                {VAULT_NAMES.POLYGON_ALL().map((x, i) =>
-                  <Route key={i} path={"/liq/" + x} element={<Liquidations collateral={x} />} />
+                {VAULTS.POLYGON_ALL().map((x, i) =>
+                  <Route key={i} path={"/liq/polygon/" + x} element={<Liquidations chain="Polygon" collateral={x} />} />
+                )}
+
+                {VAULTS.BINANCE_ALL().map((x, i) =>
+                  <Route key={i} path={"/liq/binance/" + x} element={<Liquidations chain="Binance" collateral={x} />} />
                 )}
 
               </Routes>
