@@ -10,7 +10,7 @@ export default function LiquidationsList() {
                 <Col>
                     <h2>Polygon</h2>
                     <ul>
-                        {VAULTS.POLYGON_ALL().sort().map((x, i) =>
+                        {VAULTS.POLYGON_ALL().sort(Intl.Collator().compare).map((x, i) =>
                             <li key={i}>
                                 <NavLink to={"/liq/polygon/" + x}>{x}</NavLink>
                             </li>
@@ -20,7 +20,7 @@ export default function LiquidationsList() {
                 <Col>
                     <h2>Fantom</h2>
                     <ul>
-                        {VAULTS.FANTOM_ALL().sort().map((x, i) =>
+                        {VAULTS.FANTOM_ALL().sort(Intl.Collator().compare).map((x, i) =>
                             <li key={i}>
                                 <NavLink to={"/liq/fantom/" + x}>{x}</NavLink>
                             </li>
@@ -30,7 +30,7 @@ export default function LiquidationsList() {
                 <Col>
                     <h2>Avalanche</h2>
                     <ul>
-                        {VAULTS.AVALANCHE_ALL().sort().map((x, i) =>
+                        {VAULTS.AVALANCHE_ALL().sort(Intl.Collator().compare).map((x, i) =>
                             <li key={i}>
                                 <NavLink to={"/liq/avalanche/" + x}>{x}</NavLink>
                             </li>
@@ -40,7 +40,7 @@ export default function LiquidationsList() {
                 <Col>
                     <h2>Binance</h2>
                     <ul>
-                        {VAULTS.BINANCE_ALL().sort().map((x, i) =>
+                        {VAULTS.BINANCE_ALL().sort(Intl.Collator().compare).map((x, i) =>
                             <li key={i}>
                                 <NavLink to={"/liq/binance/" + x}>{x}</NavLink>
                             </li>
