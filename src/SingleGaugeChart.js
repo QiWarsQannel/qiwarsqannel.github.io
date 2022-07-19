@@ -10,7 +10,8 @@ import {
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import { useParams } from 'react-router-dom';
-import QwQ, { stringToColour, htmlLegendPlugin } from "./QwQ";
+import QwQ, { stringToColour, htmlLegendPlugin, GLOBAL_ZOOM_CONFIG } from "./QwQ";
+import zoomPlugin from "chartjs-plugin-zoom";
 
 // eslint-disable-next-line
 Array.prototype.pushIfNotIncluded = function (element) {
@@ -25,7 +26,8 @@ ChartJS.register(
     BarElement,
     Title,
     Tooltip,
-    Legend
+    Legend,
+    zoomPlugin
 );
 
 function format_gauge_data(input, p) {
@@ -48,7 +50,7 @@ function format_gauge_data(input, p) {
 
     result["labels"] = labels;
     result["datasets"] = Object.values(r);
-    result.datasets.sort((a,b) => b.data[0] - a.data[0]);
+    result.datasets.sort((a, b) => b.data[0] - a.data[0]);
     return result
 }
 
@@ -127,8 +129,8 @@ const options = {
                     return legendItems;
                 }
             }
-        }
-
+        },
+        zoom: GLOBAL_ZOOM_CONFIG,
     },
     scales: {
         y: {
@@ -141,7 +143,7 @@ const options = {
                     family: font_family
                 },
                 callback: function (value, index, values) {
-                    return value + " %";
+                    return value.toFixed(2).replace(/[.,]00$/, "") + " %";
                 }
             },
             grid: {
@@ -163,7 +165,7 @@ const options = {
     }
 };
 
-var api=null;
+var api = null;
 
 
 export default function SingleGaugeChart(props) {
@@ -173,7 +175,7 @@ export default function SingleGaugeChart(props) {
     const [fdata, setFData] = React.useState({ datasets: [] });
     const [gaugeId, setGaugeId] = React.useState();
     const legends = props.legends;
-    api=props.api;
+    api = props.api;
 
     React.useEffect(() => {
         if ((fdata.datasets.length === 0) || (params.id !== gaugeId)) {
@@ -181,7 +183,7 @@ export default function SingleGaugeChart(props) {
                 .post("/", query, QwQ.headers)
                 .then(function (response) {
                     setFData(format_gauge_data(response.data, params));
-                    options.plugins.title.text = "Gauge "+params.id;
+                    options.plugins.title.text = "Gauge " + params.id;
                     setGaugeId(params.id);
                 })
                 .catch((err) => {
@@ -195,7 +197,7 @@ export default function SingleGaugeChart(props) {
             <div>
                 <Bar data={fdata} options={options} plugins={[htmlLegendPlugin]} className="responsive-chart" />
             </div>
-            {legends ? <div id="legend-container-single" style={{ flexWrap: "wrap" }}></div>  :<div id="legend-container-single" style={{ display: "none" }}></div>}
+            {legends ? <div id="legend-container-single" style={{ flexWrap: "wrap" }}></div> : <div id="legend-container-single" style={{ display: "none" }}></div>}
         </>
     );
 }

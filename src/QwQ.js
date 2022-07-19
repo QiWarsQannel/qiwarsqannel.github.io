@@ -175,6 +175,24 @@ export const htmlLegendPlugin = {
     }
 };
 
+export const GLOBAL_ZOOM_CONFIG = {
+    zoom: {
+        wheel: {
+            enabled: true,
+        },
+        pinch: {
+            enabled: true
+        },
+        mode: 'xy',
+    },
+    limits: {
+        y: {
+            min: 0,
+            max: 100
+        }
+    }
+}
+
 export default class QwQ {
     static graphql = {
         ALL_GAUGE_VOTES: `query {

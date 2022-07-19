@@ -10,7 +10,7 @@ import {
     Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import QwQ, { stringToColour, htmlLegendPlugin, multidata_sort } from "./QwQ";
+import QwQ, { stringToColour, htmlLegendPlugin, multidata_sort, GLOBAL_ZOOM_CONFIG } from "./QwQ";
 
 // eslint-disable-next-line
 Array.prototype.pushIfNotIncluded = function (element) {
@@ -138,7 +138,8 @@ const options = {
                     return legendItems;
                 }
             }
-        }
+        },
+        zoom: GLOBAL_ZOOM_CONFIG,
     },
     scales: {
         y: {
@@ -151,7 +152,7 @@ const options = {
                     family: font_family
                 },
                 callback: function (value, index, values) {
-                    return value + " %";
+                    return value.toFixed(2).replace(/[.,]00$/, "") + " %";
                 }
             },
             grid: {

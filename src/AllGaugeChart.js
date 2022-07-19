@@ -10,7 +10,8 @@ import {
     Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import QwQ, { stringToColour, htmlLegendPlugin, multidata_sort } from "./QwQ";
+import QwQ, { stringToColour, htmlLegendPlugin, multidata_sort, GLOBAL_ZOOM_CONFIG } from "./QwQ";
+import zoomPlugin from "chartjs-plugin-zoom";
 
 // eslint-disable-next-line
 Array.prototype.pushIfNotIncluded = function (element) {
@@ -26,7 +27,8 @@ ChartJS.register(
     LineElement,
     Title,
     Tooltip,
-    Legend
+    Legend,
+    zoomPlugin
 );
 
 function format_gauge_data(input) {
@@ -128,7 +130,8 @@ const options = {
                     return legendItems;
                 }
             }
-        }
+        },
+        zoom: GLOBAL_ZOOM_CONFIG,
     },
     scales: {
         y: {
@@ -141,7 +144,7 @@ const options = {
                     family: font_family
                 },
                 callback: function (value, index, values) {
-                    return value + " %";
+                    return value.toFixed(2).replace(/[.,]00$/, "") + " %";
                 }
             },
             grid: {
@@ -169,7 +172,7 @@ export default function AllGaugeChart(props) {
 
     const [fdata, setFData] = React.useState({ datasets: [] });
     const legends = props.legends;
-    api=props.api;
+    api = props.api;
 
     React.useEffect(() => {
         if (fdata.datasets.length === 0) {
@@ -189,7 +192,7 @@ export default function AllGaugeChart(props) {
             <div>
                 <Line data={fdata} options={options} plugins={[htmlLegendPlugin]} className="responsive-chart" />
             </div>
-            {legends ? <div id="legend-container" style={{ flexWrap: "wrap" }}></div>  :<div id="legend-container" style={{ display: "none" }}></div>}
+            {legends ? <div id="legend-container" style={{ flexWrap: "wrap" }}></div> : <div id="legend-container" style={{ display: "none" }}></div>}
         </>
     );
 }
