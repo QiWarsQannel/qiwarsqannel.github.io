@@ -158,6 +158,13 @@ function App() {
                   </>
                 )}
 
+                {VAULTS.AVALANCHE_ALL().map((x, i) =>
+                  <>
+                    <Route key={i} path={"/liq/avalanche/" + x} element={<Liquidations chain="Avalanche" collateral={x} />} />
+                    <Route key={i} path={"/liq/avalanche/" + x + "/:page"} element={<Liquidations chain="Avalanche" collateral={x} />} />
+                  </>
+                )}
+
               </Routes>
             </Col>
           </Row>

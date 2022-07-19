@@ -28,6 +28,16 @@ export default function LiquidationsList() {
                     </ul>
                 </Col>
                 <Col>
+                    <h2>Avalanche</h2>
+                    <ul>
+                        {VAULTS.AVALANCHE_ALL().sort().map((x, i) =>
+                            <li key={i}>
+                                <NavLink to={"/liq/avalanche/" + x}>{x}</NavLink>
+                            </li>
+                        )}
+                    </ul>
+                </Col>
+                <Col>
                     <h2>Binance</h2>
                     <ul>
                         {VAULTS.BINANCE_ALL().sort().map((x, i) =>

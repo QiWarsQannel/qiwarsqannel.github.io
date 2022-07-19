@@ -307,14 +307,30 @@ export class VAULTS {
         })
         return all;
     }
+    static AVALANCHE = {
+        "0xfA19c1d104F4AEfb8d5564f02B3AdCa1b515da58": "mooAaveAVAX",
+        "0x13a7fe3ab741ea6301db8b164290be711f546a73": "SDAM3CRV",
+        "0xa9122dacf3fccf1aae6b8ddd1f75b6267e5cbbb8": "WETH",
+        "0x1f8f7a1d38e41eaf0ed916def29bdd13f2a3f11a": "WBTC",
+        "0x73a755378788a4542a780002a75a7bae7f558730": "WAVAX",
+    }
+    static AVALANCHE_ALL = function () {
+        let all = [];
+        Object.entries(this.AVALANCHE).forEach(function (x, i) {
+            all.push(x[1]);
+        })
+        return all;
+    }
     static SCAN_TX_URI = {
         "Polygon": "https://polygonscan.com/tx/",
         "Binance": "https://bscscan.com/tx/",
-        "Fantom": "https://ftmscan.com/tx/"
+        "Fantom": "https://ftmscan.com/tx/",
+        "Avalanche": "https://snowtrace.io/tx/",
     }
     static CHAIN = {
         "Polygon": this.POLYGON,
         "Binance": this.BINANCE,
-        "Fantom": this.FANTOM
+        "Fantom": this.FANTOM,
+        "Avalanche": this.AVALANCHE,
     }
 }
