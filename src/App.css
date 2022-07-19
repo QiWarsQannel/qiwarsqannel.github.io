@@ -1,9 +1,11 @@
 a {
   color: white;
 }
+
 .logo {
   margin: 0;
 }
+
 .logo a {
   color: #e24c54 !important;
 }
@@ -12,20 +14,25 @@ header nav a {
   margin-left: 1em;
   color: white;
 }
+
 header nav u {
   cursor: pointer;
 }
+
 nav * {
   text-decoration-color: #e24c54;
 }
+
 .dropdown a {
   margin-left: 0;
 }
+
 .dropdown {
   display: inline-block;
   position: relative;
   margin-left: 1em;
 }
+
 .dropdown ul {
   display: none;
   position: absolute;
@@ -40,16 +47,47 @@ nav * {
   padding: 0.5em 1em;
   text-align: center;
 }
+
 .dropdown li {
   list-style: none;
   font-size: 16px;
 }
+
 .dropdown:hover ul {
   display: block;
 }
-.qimp, .active {
+
+nav.pagination {
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  min-height: 1em;
+}
+
+nav.pagination a {
+  text-decoration: none !important;
+  color: #e24c54;
+  font-weight: bold;
+  display: inline-block;
+  width: 2em;
+}
+
+nav.pagination div:last-child a {
+  text-align: end;
+}
+
+nav.pagination .label {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  pointer-events: none;
+}
+
+.qimp,
+.active {
   color: #e24c54;
 }
+
 .table {
   color: #666;
 }
@@ -61,17 +99,20 @@ nav * {
 .App-header {
   margin: 1em 0;
 }
+
 .responsive-chart {
   min-height: 80vh;
   margin-bottom: 1em;
   min-width: 100% !important;
   max-width: 100% !important;
 }
+
 .navbar {
   display: flex;
   justify-content: flex-end;
   align-items: center;
 }
+
 .center {
   text-align: center;
 }
@@ -80,29 +121,37 @@ table {
   width: 100%;
   font-size: 14px;
 }
+
 table a {
   color: white;
   text-decoration-color: #e24c54;
 }
+
 table svg {
   color: #e24c54;
   margin-left: 5px;
 }
+
 table thead {
   color: #fff;
 }
+
 table thead tr {
   background: #333;
 }
+
 table th {
   border: 1px solid #333;
 }
+
 table td {
   border: 1px solid #808080;
 }
+
 table .fresh td {
   border-color: inherit;
 }
+
 small.fresh {
   color: #6ce24c;
 }
@@ -110,6 +159,7 @@ small.fresh {
 tbody td {
   text-align: center;
 }
+
 tbody td:first-child {
   text-align: right;
 }

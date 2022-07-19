@@ -138,15 +138,24 @@ function App() {
 
                 <Route path="/liq/" element={<LiquidationsList />} />
                 {VAULTS.POLYGON_ALL().map((x, i) =>
-                  <Route key={i} path={"/liq/polygon/" + x} element={<Liquidations chain="Polygon" collateral={x} />} />
+                  <>
+                    <Route key={i} path={"/liq/polygon/" + x} element={<Liquidations chain="Polygon" collateral={x} />} />
+                    <Route key={i} path={"/liq/polygon/" + x + "/:page"} element={<Liquidations chain="Polygon" collateral={x} />} />
+                  </>
                 )}
 
                 {VAULTS.BINANCE_ALL().map((x, i) =>
-                  <Route key={i} path={"/liq/binance/" + x} element={<Liquidations chain="Binance" collateral={x} />} />
+                  <>
+                    <Route key={i} path={"/liq/binance/" + x} element={<Liquidations chain="Binance" collateral={x} />} />
+                    <Route key={i} path={"/liq/binance/" + x + "/:page"} element={<Liquidations chain="Binance" collateral={x} />} />
+                  </>
                 )}
 
                 {VAULTS.FANTOM_ALL().map((x, i) =>
-                  <Route key={i} path={"/liq/fantom/" + x} element={<Liquidations chain="Fantom" collateral={x} />} />
+                  <>
+                    <Route key={i} path={"/liq/fantom/" + x} element={<Liquidations chain="Fantom" collateral={x} />} />
+                    <Route key={i} path={"/liq/fantom/" + x + "/:page"} element={<Liquidations chain="Fantom" collateral={x} />} />
+                  </>
                 )}
 
               </Routes>
