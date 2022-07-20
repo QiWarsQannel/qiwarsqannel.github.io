@@ -1,6 +1,6 @@
 import { VAULTS } from "./QwQ";
 import { NavLink } from "react-router-dom";
-import { Container, Row, Col } from "react-grid-system";
+import { Container, Row, Col } from "react-bootstrap";
 
 export default function LiquidationsList() {
     return (
