@@ -174,3 +174,7 @@ table input[type="text"]::placeholder {
 .copy-to-clipboard {
   cursor: pointer;
 }
+
+#liq ul {
+  font-size: 18px;
+}

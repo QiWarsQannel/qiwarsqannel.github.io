@@ -4,7 +4,7 @@ import { Container, Row, Col } from "react-grid-system";
 
 export default function LiquidationsList() {
     return (
-        <Container>
+        <Container id="liq">
             <h1>Liquidations</h1>
             <Row>
                 <Col>
