@@ -10,9 +10,9 @@ import { useParams } from 'react-router-dom';
 
 export default function Liquidations(props) {
     const [owner, setOwner] = useState();
-    const handleOwner = (e) => setOwner(e.target.value);
+    const handleOwner = (e) => setOwner(e.target.value.toLowerCase());
     const [buyer, setBuyer] = useState();
-    const handleBuyer = (e) => setBuyer(e.target.value);
+    const handleBuyer = (e) => setBuyer(e.target.value.toLowerCase());
     const [vaultID, setVaultID] = useState();
     const handleVaultID = (e) => setVaultID(e.target.value);
     const col = props.collateral;
@@ -28,13 +28,13 @@ export default function Liquidations(props) {
         (query) => {
             query.withCount().skip(page * limit).limit(limit).descending("block_number");
             if (owner && owner.length > 0) {
-                query.equalTo("owner", owner)
+                query.equalTo("owner", owner, "i")
             }
             if (buyer && buyer.length > 0) {
-                query.equalTo("buyer", buyer)
+                query.equalTo("buyer", buyer, "i")
             }
             if (vaultID && vaultID.length > 0) {
-                query.equalTo("vaultID", vaultID)
+                query.equalTo("vaultID", vaultID, "i")
             }
             return query;
         },
