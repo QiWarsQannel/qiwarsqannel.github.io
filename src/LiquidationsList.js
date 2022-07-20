@@ -8,7 +8,7 @@ export default function LiquidationsList() {
             <h1>Liquidations</h1>
             <Row>
                 <Col>
-                    <h2>Polygon</h2>
+                    <h2 className="qimp">Polygon</h2>
                     <ul>
                         {VAULTS.POLYGON_ALL().sort(Intl.Collator().compare).map((x, i) =>
                             <li key={i}>
@@ -18,7 +18,7 @@ export default function LiquidationsList() {
                     </ul>
                 </Col>
                 <Col>
-                    <h2>Fantom</h2>
+                    <h2 className="qimp">Fantom</h2>
                     <ul>
                         {VAULTS.FANTOM_ALL().sort(Intl.Collator().compare).map((x, i) =>
                             <li key={i}>
@@ -28,7 +28,7 @@ export default function LiquidationsList() {
                     </ul>
                 </Col>
                 <Col>
-                    <h2>Avalanche</h2>
+                    <h2 className="qimp">Avalanche</h2>
                     <ul>
                         {VAULTS.AVALANCHE_ALL().sort(Intl.Collator().compare).map((x, i) =>
                             <li key={i}>
@@ -38,7 +38,7 @@ export default function LiquidationsList() {
                     </ul>
                 </Col>
                 <Col>
-                    <h2>Binance</h2>
+                    <h2 className="qimp">Binance</h2>
                     <ul>
                         {VAULTS.BINANCE_ALL().sort(Intl.Collator().compare).map((x, i) =>
                             <li key={i}>
