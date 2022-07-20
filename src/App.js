@@ -1,18 +1,21 @@
 import React from 'react';
 import './App.css';
-import { Container, Row, Col } from "react-grid-system";
+//import { Container, Row, Col } from "react-grid-system";
 import AllGaugeChart from './AllGaugeChart';
 import TotalVotesChart from './TotalVotesChart';
 import TotalDystVotesChart from './TotalDystVotesChart';
 import SingleGaugeChart from './SingleGaugeChart';
 import DystAllGaugeChart from './DystAllGaugeChart';
 import DystSingleGaugeChart from './DystSingleGaugeChart';
-import { HashRouter, Routes, Route, NavLink, Link } from 'react-router-dom';
+import { HashRouter, Routes, Route, Link } from 'react-router-dom';
 import { setup } from 'axios-cache-adapter';
 import QwQ, { VAULTS } from './QwQ';
 import QiBuyBacks from './QiBuyBacks';
 import Liquidations from './Liquidations';
 import LiquidationsList from './LiquidationsList';
+import { Navbar, NavDropdown, Container, Row, Col } from "react-bootstrap";
+import { LinkContainer } from 'react-router-bootstrap';
+import './bootstrap.scss';
 
 function count_gauges(input) {
   return input["data"]["proposals"].length;
@@ -60,54 +63,68 @@ function App() {
     <div className="App">
       <HashRouter>
         <Container style={{ width: "100vw" }}>
-          <header className="App-header">
-            <Row align="center" justify="end">
-              <Col xs={12} lg={6}>
-                <h1 className="logo"><Link to="/">Qi Wars Qannel</Link></h1>
-              </Col>
-              <Col xs={12} lg={6} style={{ textAlign: "end" }}>
-                <nav>
-                  <div className="dropdown">
-                    <NavLink to="/gauge">Vaults</NavLink>
-                    <ul>
-                      <li key="0">
-                        <NavLink to="/gauge/eqi">eQI</NavLink>
-                      </li>
-                      {[...Array(numGauges)].map((x, i) =>
-                        <li key={i}>
-                          <NavLink to={"/gauge/" + (i + 1)}>Gauge {i + 1}</NavLink>
-                        </li>
-                      )}
-                    </ul>
-                  </div>
-                  <div className="dropdown">
-                    <NavLink to="/dyst">veDYST</NavLink>
-                    <ul>
-                      <li key="0">
-                        <NavLink to="/dyst/eqi">eQI</NavLink>
-                      </li>
-                      {[...Array(numDystGauges)].map((x, i) =>
-                        <li key={i}>
-                          <NavLink to={"/dyst/" + (i + 1)}>Round {i + 1}</NavLink>
-                        </li>
-                      )}
-                    </ul>
-                  </div>
-                  <div className="dropdown">
-                    <u>Tools</u>
-                    <ul>
-                      <li key="0">
-                        <NavLink to="/buybacks">Buybacks</NavLink>
-                      </li>
-                      <li key="1">
-                        <NavLink to="/liq">Liquidations</NavLink>
-                      </li>
-                    </ul>
-                  </div>
-                </nav>
-              </Col>
-            </Row>
-          </header>
+          <Navbar collapseOnSelect expand="md" variant="dark">
+            <Navbar.Brand>
+              <h1 className="logo"><Link to="/">Qi Wars Qannel</Link></h1>
+            </Navbar.Brand>
+
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+            <Navbar.Collapse className="justify-content-end" id="responsive-navbar-nav">
+              <NavDropdown title="Vaults">
+                <LinkContainer to="/gauge">
+                  <NavDropdown.Item>
+                    Overview
+                  </NavDropdown.Item>
+                </LinkContainer>
+                <LinkContainer to="/gauge/eqi">
+                  <NavDropdown.Item>
+                    eQI
+                  </NavDropdown.Item>
+                </LinkContainer>
+                {[...Array(numGauges)].map((x, i) =>
+                  <LinkContainer to={"/gauge/" + (i + 1)}>
+                    <NavDropdown.Item>
+                      Gauge {i + 1}
+                    </NavDropdown.Item>
+                  </LinkContainer>
+                )}
+
+              </NavDropdown >
+              <NavDropdown title="veDYST">
+                <LinkContainer to="/dyst">
+                  <NavDropdown.Item>
+                    Overview
+                  </NavDropdown.Item>
+                </LinkContainer>
+                <LinkContainer to="/dyst/eqi">
+                  <NavDropdown.Item>
+                    eQI
+                  </NavDropdown.Item>
+                </LinkContainer>
+                {[...Array(numDystGauges)].map((x, i) =>
+                  <LinkContainer to={"/dyst/" + (i + 1)}>
+                    <NavDropdown.Item>
+                      Round {i + 1}
+                    </NavDropdown.Item>
+                  </LinkContainer>
+                )}
+
+              </NavDropdown >
+              <NavDropdown title="Tools">
+                <LinkContainer to="/buybacks">
+                  <NavDropdown.Item>
+                    Buybacks
+                  </NavDropdown.Item>
+                </LinkContainer>
+                <LinkContainer to="/liq">
+                  <NavDropdown.Item>
+                    Liquidations
+                  </NavDropdown.Item>
+                </LinkContainer>
+              </NavDropdown >
+            </Navbar.Collapse>
+
+          </Navbar>
           <Row>
             <Col>
               <Routes>
@@ -115,11 +132,11 @@ function App() {
                   <>
                     <Container>
                       <Row>
-                        <Col xs={12} lg={6}>
+                        <Col xs={12} md={6}>
                           <h4 className="center">Vault Incentive Gauge</h4>
                           <AllGaugeChart api={api} />
                         </Col>
-                        <Col xs={12} lg={6}>
+                        <Col xs={12} md={6}>
                           <h4 className="center">Dystopia veDYST Rounds</h4>
                           <DystAllGaugeChart api={api} />
                         </Col>
@@ -169,7 +186,7 @@ function App() {
             </Col>
           </Row>
         </Container>
-      </HashRouter>
+      </HashRouter >
       <footer style={{ padding: "1em", marginTop: "1em" }}>
         <center><small><span className="table">&#x253B;&#x2501;&#x253B;</span> &#xFE35; <span className="qimp">&#x10DA;(QwQ&#x10DA;)</span></small></center>
       </footer>

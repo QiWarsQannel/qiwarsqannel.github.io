@@ -7,7 +7,7 @@ import { numberWithCommas, mix_color } from "./QwQ.js";
 
 export default function QiBuyBacks(props) {
 
-    const fresh_threshold = 14;
+    const fresh_threshold = 15;
     const fresh_color = "6ce24c";
     const { data } = useMoralisQuery("PolygonTokenTransfers", (query) => query.equalTo("to_address", "0x1d8a6b7941ef1349c1b5e378783cd56b001ecfbc").equalTo("token_address", "0x580a84c73811e1839f75d86d75d88cca0c241ff4").limit(500));
     const getData = data => data;
@@ -17,7 +17,7 @@ export default function QiBuyBacks(props) {
     return (
         <>
         <h4 className="center">QI Buybacks</h4>
-        <small className="fresh" style={{fontSize: "12px", float: "right"}}>* Highlighted rows are less than <u>two weeks old</u>.</small>
+        <small className="fresh" style={{fontSize: "12px", float: "right"}}>* Highlighted rows are less than <u>{fresh_threshold} days old</u>.</small>
         <table>
             <thead>
                 <tr>

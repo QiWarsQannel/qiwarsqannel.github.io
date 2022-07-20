@@ -19,43 +19,14 @@ header nav u {
   cursor: pointer;
 }
 
+#responsive-navbar-nav {
+  gap: 1em;
+}
+
 nav * {
   text-decoration-color: #e24c54;
 }
 
-.dropdown a {
-  margin-left: 0;
-}
-
-.dropdown {
-  display: inline-block;
-  position: relative;
-  margin-left: 1em;
-}
-
-.dropdown ul {
-  display: none;
-  position: absolute;
-  left: -1em;
-  /*right: -1em;*/
-  min-width: 100%;
-  padding: 0;
-  margin: 0;
-  z-index: 999;
-  text-align: left;
-  background-color: #333;
-  padding: 0.5em 1em;
-  text-align: center;
-}
-
-.dropdown li {
-  list-style: none;
-  font-size: 16px;
-}
-
-.dropdown:hover ul {
-  display: block;
-}
 
 nav.pagination {
   display: flex;
