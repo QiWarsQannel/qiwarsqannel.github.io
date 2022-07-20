@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useMoralisQuery } from "react-moralis";
 import { BsBoxArrowUpRight } from 'react-icons/bs';
 import Address from './Address.js';
@@ -8,6 +9,12 @@ import { VAULTS } from "./QwQ.js";
 import { useParams } from 'react-router-dom';
 
 export default function Liquidations(props) {
+    const [owner, setOwner] = useState();
+    const handleOwner = (e) => setOwner(e.target.value);
+    const [buyer, setBuyer] = useState();
+    const handleBuyer = (e) => setBuyer(e.target.value);
+    const [vaultID, setVaultID] = useState();
+    const handleVaultID = (e) => setVaultID(e.target.value);
     const col = props.collateral;
     let params = useParams();
     const chain = props.chain;
@@ -18,8 +25,20 @@ export default function Liquidations(props) {
     }
     const { data } = useMoralisQuery(
         "Vault" + chain + col,
-        (query) => query.withCount().skip(page * limit).limit(limit).descending("block_number"),
-        [col, params.page]
+        (query) => {
+            query.withCount().skip(page * limit).limit(limit).descending("block_number");
+            if (owner && owner.length > 0) {
+                query.equalTo("owner", owner)
+            }
+            if (buyer && buyer.length > 0) {
+                query.equalTo("buyer", buyer)
+            }
+            if (vaultID && vaultID.length > 0) {
+                query.equalTo("vaultID", vaultID)
+            }
+            return query;
+        },
+        [col, params.page, owner, buyer, vaultID]
     );
     const getData = data => data["results"];
 
@@ -36,7 +55,7 @@ export default function Liquidations(props) {
                         <NavLink to={"/liq/" + chain.toLowerCase() + "/" + col + "/" + ((page * 1) - 1)}>{"<"}</NavLink>
                     }
                 </div>
-                <div className="label">{page*1+1} {data["count"] && "(" + (Math.floor(data["count"] / limit)*1+1) + ")"}</div>
+                <div className="label">{(page * 1) + 1} {data["count"] && "(" + ((Math.floor(data["count"] / limit) * 1) + 1) + ")"}</div>
                 <div>
                     {page < Math.floor(data["count"] / limit) &&
                         <NavLink to={"/liq/" + chain.toLowerCase() + "/" + col + "/" + ((page * 1) + 1)}>{">"}</NavLink>
@@ -46,9 +65,19 @@ export default function Liquidations(props) {
                     }
                 </div>
             </nav>
-            <small style={{ fontSize: "12px", float: "right" }}>{limit*page}-{page < Math.floor(data["count"] / limit) && (limit*page)+(limit-1)}{page >= Math.floor(data["count"] / limit) && (limit*page)+(data["count"] % limit)} ({data["count"]})</small>
+            <small style={{ fontSize: "12px", float: "right" }}>{limit * page}-{page < Math.floor(data["count"] / limit) && (limit * page) + (limit - 1)}{page >= Math.floor(data["count"] / limit) && (limit * page) + (data["count"] % limit)} ({data["count"]})</small>
             <table>
                 <thead>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th><input type="text" placeholder="Buyer address" value={buyer} onChange={handleBuyer} style={{width: "8em"}}/></th>
+                        <th><input type="text" placeholder="Owner address" value={owner} onChange={handleOwner} style={{width: "8em"}}/></th>
+                        <th><input type="text" placeholder="Vault ID" value={vaultID} onChange={handleVaultID} style={{width: "5em"}}/></th>
+                        <th></th>
+                    </tr>
                     <tr>
                         <th>Collateral Liquidated</th>
                         <th>Vault</th>

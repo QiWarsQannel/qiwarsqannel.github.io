@@ -163,7 +163,14 @@ tbody td {
 tbody td:first-child {
   text-align: right;
 }
-
+table input[type="text"] {
+  background: gray;
+  color: white;
+  text-align: center;
+}
+table input[type="text"]::placeholder {
+  color: lightgray;
+}
 .copy-to-clipboard {
   cursor: pointer;
 }
