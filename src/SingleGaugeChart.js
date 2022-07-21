@@ -10,8 +10,7 @@ import {
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import { useParams } from 'react-router-dom';
-import QwQ, { stringToColour, htmlLegendPlugin, GLOBAL_ZOOM_CONFIG } from "./QwQ";
-import zoomPlugin from "chartjs-plugin-zoom";
+import QwQ, { stringToColour, htmlLegendPlugin } from "./QwQ";
 
 // eslint-disable-next-line
 Array.prototype.pushIfNotIncluded = function (element) {
@@ -27,7 +26,6 @@ ChartJS.register(
     Title,
     Tooltip,
     Legend,
-    zoomPlugin
 );
 
 function format_gauge_data(input, p) {
@@ -130,7 +128,6 @@ const options = {
                 }
             }
         },
-        zoom: GLOBAL_ZOOM_CONFIG,
     },
     scales: {
         y: {

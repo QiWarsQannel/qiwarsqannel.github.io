@@ -176,6 +176,10 @@ export const htmlLegendPlugin = {
 };
 
 export const GLOBAL_ZOOM_CONFIG = {
+    pan: {
+        enabled: true,
+        mode: 'x',
+    },
     zoom: {
         wheel: {
             enabled: true,
@@ -183,7 +187,7 @@ export const GLOBAL_ZOOM_CONFIG = {
         pinch: {
             enabled: true
         },
-        mode: 'xy',
+        mode: 'x',
     },
     limits: {
         y: {
