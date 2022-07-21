@@ -1,5 +1,4 @@
 import { useMoralisQuery } from "react-moralis";
-import { useParams } from 'react-router-dom';
 import Placeholder from 'react-bootstrap/Placeholder';
 
 export default function LiquidationTotal(props) {
