@@ -11,6 +11,7 @@ import {
 import { Bar } from 'react-chartjs-2';
 import { useParams } from 'react-router-dom';
 import QwQ, { stringToColour, htmlLegendPlugin, GLOBAL_ZOOM_CONFIG } from "./QwQ";
+import zoomPlugin from "chartjs-plugin-zoom";
 
 // eslint-disable-next-line
 Array.prototype.pushIfNotIncluded = function (element) {
@@ -25,7 +26,8 @@ ChartJS.register(
     BarElement,
     Title,
     Tooltip,
-    Legend
+    Legend,
+    zoomPlugin,
 );
 
 

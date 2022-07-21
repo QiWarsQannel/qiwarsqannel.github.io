@@ -11,6 +11,7 @@ import {
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import QwQ, { stringToColour, htmlLegendPlugin, multidata_sort, GLOBAL_ZOOM_CONFIG } from "./QwQ";
+import zoomPlugin from "chartjs-plugin-zoom";
 
 // eslint-disable-next-line
 Array.prototype.pushIfNotIncluded = function (element) {
@@ -26,7 +27,8 @@ ChartJS.register(
     LineElement,
     Title,
     Tooltip,
-    Legend
+    Legend,
+    zoomPlugin,
 );
 
 function normalize_vote_name(str) {
