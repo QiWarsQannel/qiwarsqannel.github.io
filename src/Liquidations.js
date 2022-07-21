@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useMoralisQuery } from "react-moralis";
-import { BsBoxArrowUpRight } from 'react-icons/bs';
+import { BsBoxArrowUpRight, BsFillCaretDownFill, BsFillCaretUpFill } from 'react-icons/bs';
 import Address from './Address.js';
 import Token from "./Token.js";
 import Vault from "./Vault.js";
@@ -15,6 +15,16 @@ export default function Liquidations(props) {
     const handleBuyer = (e) => setBuyer(e.target.value.toLowerCase());
     const [vaultID, setVaultID] = useState();
     const handleVaultID = (e) => setVaultID(e.target.value);
+    const [dateSort, setDateSort] = useState("down");
+    const handleDateSort = (e) => {
+        if (dateSort === "up") {
+            setDateSort("down");
+        }
+        else if (dateSort === "down") {
+            setDateSort("up");
+        }
+        
+    }
     const col = props.collateral;
     let params = useParams();
     const chain = props.chain;
@@ -23,10 +33,16 @@ export default function Liquidations(props) {
     if (params.page) {
         page = params.page;
     }
-    const { data } = useMoralisQuery(
+    const { data, isLoading } = useMoralisQuery(
         "Vault" + chain + col,
         (query) => {
-            query.withCount().skip(page * limit).limit(limit).descending("block_number");
+            query.withCount().skip(page * limit).limit(limit);
+            if (dateSort === "down") {
+                query.descending("block_number");
+            }
+            else {
+                query.ascending("block_number");
+            }
             if (owner && owner.length > 0) {
                 query.equalTo("owner", owner, "i")
             }
@@ -36,9 +52,10 @@ export default function Liquidations(props) {
             if (vaultID && vaultID.length > 0) {
                 query.equalTo("vaultID", vaultID, "i")
             }
+
             return query;
         },
-        [col, params.page, owner, buyer, vaultID]
+        [col, params.page, owner, buyer, vaultID, dateSort]
     );
     const getData = data => data["results"];
 
@@ -69,14 +86,14 @@ export default function Liquidations(props) {
             <table>
                 <thead>
                     <tr>
-                        <th></th>
+                        <th>{isLoading && <span>teste</span>}</th>
                         <th></th>
                         <th></th>
                         <th></th>
                         <th><input type="text" placeholder="Buyer address" value={buyer} onChange={handleBuyer} style={{width: "8em"}}/></th>
                         <th><input type="text" placeholder="Owner address" value={owner} onChange={handleOwner} style={{width: "8em"}}/></th>
                         <th><input type="text" placeholder="Vault ID" value={vaultID} onChange={handleVaultID} style={{width: "5em"}}/></th>
-                        <th></th>
+                        <th><button onClick={handleDateSort} style={{width: "2em", padding: "0"}}>{dateSort === "down"? <BsFillCaretDownFill/> : <BsFillCaretUpFill/>}</button></th>
                     </tr>
                     <tr>
                         <th>Collateral Liquidated</th>
@@ -90,8 +107,7 @@ export default function Liquidations(props) {
                     </tr>
                 </thead>
                 <tbody>
-
-                    {(data.length > 0 || data.count > 0) && getData(data).map((x, i) =>
+                    {(!isLoading && (data.length > 0 || data.count > 0)) && getData(data).map((x, i) =>
                         <tr key={i}>
                             <td><Token>{x.attributes.collateralLiquidated}</Token></td>
                             <td><Vault chain={chain}>{x.attributes.address}</Vault></td>
