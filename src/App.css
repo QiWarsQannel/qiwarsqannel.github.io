@@ -26,6 +26,9 @@ header nav u {
 nav * {
   text-decoration-color: #e24c54;
 }
+.total { 
+  color: #e24c54;
+}
 
 
 nav.pagination {
