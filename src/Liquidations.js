@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useMoralisQuery } from "react-moralis";
-import { BsBoxArrowUpRight, BsFillCaretDownFill, BsFillCaretUpFill } from 'react-icons/bs';
+import { BsBoxArrowUpRight, BsFillCaretDownFill, BsFillCaretUpFill, BsFillRecordFill } from 'react-icons/bs';
 import Address from './Address.js';
 import Token from "./Token.js";
 import Vault from "./Vault.js";
@@ -17,11 +17,65 @@ export default function Liquidations(props) {
     const handleVaultID = (e) => setVaultID(e.target.value);
     const [dateSort, setDateSort] = useState("down");
     const handleDateSort = (e) => {
+        setRepaidSort("none");
+        setLiquidatedSort("none");
+        setClosingSort("none");
         if (dateSort === "up") {
-            setDateSort("down");
+            setDateSort("none");
         }
         else if (dateSort === "down") {
             setDateSort("up");
+        }
+        else {
+            setDateSort("down");
+        }
+        
+    }
+    const [repaidSort, setRepaidSort] = useState("none");
+    const handleRepaidSort = (e) => {
+        setDateSort("none");
+        setLiquidatedSort("none");
+        setClosingSort("none");
+        if (repaidSort === "up") {
+            setRepaidSort("none");
+        }
+        else if (repaidSort === "down") {
+            setRepaidSort("up");
+        }
+        else {
+            setRepaidSort("down");
+        }
+        
+    }
+    const [liquidatedSort, setLiquidatedSort] = useState("none");
+    const handleLiquidatedSort = (e) => {
+        setDateSort("none");
+        setRepaidSort("none");
+        setClosingSort("none");
+        if (liquidatedSort === "up") {
+            setLiquidatedSort("none");
+        }
+        else if (liquidatedSort === "down") {
+            setLiquidatedSort("up");
+        }
+        else {
+            setLiquidatedSort("down");
+        }
+        
+    }
+    const [closingSort, setClosingSort] = useState("none");
+    const handleClosingSort = (e) => {
+        setDateSort("none");
+        setRepaidSort("none");
+        setLiquidatedSort("none");
+        if (closingSort === "up") {
+            setClosingSort("none");
+        }
+        else if (closingSort === "down") {
+            setClosingSort("up");
+        }
+        else {
+            setClosingSort("down");
         }
         
     }
@@ -40,9 +94,31 @@ export default function Liquidations(props) {
             if (dateSort === "down") {
                 query.descending("block_number");
             }
-            else {
+            else if (dateSort === "up") {
                 query.ascending("block_number");
             }
+
+            if (repaidSort === "down") {
+                query.descending("debtRepaid_decimal");
+            }
+            else if (repaidSort === "up") {
+                query.ascending("debtRepaid_decimal");
+            }
+
+            if (liquidatedSort === "down") {
+                query.descending("collateralLiquidated_decimal");
+            }
+            else if (liquidatedSort === "up") {
+                query.ascending("collateralLiquidated_decimal");
+            }
+
+            if (closingSort === "down") {
+                query.descending("closingFee_decimal");
+            }
+            else if (closingSort === "up") {
+                query.ascending("closingFee_decimal");
+            }
+            
             if (owner && owner.length > 0) {
                 query.equalTo("owner", owner, "i")
             }
@@ -55,7 +131,7 @@ export default function Liquidations(props) {
 
             return query;
         },
-        [col, params.page, owner, buyer, vaultID, dateSort]
+        [col, params.page, owner, buyer, vaultID, dateSort, repaidSort, liquidatedSort, closingSort]
     );
     const getData = data => data["results"];
 
@@ -86,14 +162,14 @@ export default function Liquidations(props) {
             <table>
                 <thead>
                     <tr>
-                        <th>{isLoading && <span>teste</span>}</th>
+                        <th><button onClick={handleLiquidatedSort} style={{width: "2em", padding: "0"}}>{liquidatedSort === "down"? <BsFillCaretDownFill/> : (liquidatedSort === "up"? <BsFillCaretUpFill/> : <BsFillRecordFill/>)}</button></th>
                         <th></th>
-                        <th></th>
-                        <th></th>
+                        <th><button onClick={handleClosingSort} style={{width: "2em", padding: "0"}}>{closingSort === "down"? <BsFillCaretDownFill/> : (closingSort === "up"? <BsFillCaretUpFill/> : <BsFillRecordFill/>)}</button></th>
+                        <th><button onClick={handleRepaidSort} style={{width: "2em", padding: "0"}}>{repaidSort === "down"? <BsFillCaretDownFill/> : (repaidSort === "up"? <BsFillCaretUpFill/> : <BsFillRecordFill/>)}</button></th>
                         <th><input type="text" placeholder="Buyer address" value={buyer} onChange={handleBuyer} style={{width: "8em"}}/></th>
                         <th><input type="text" placeholder="Owner address" value={owner} onChange={handleOwner} style={{width: "8em"}}/></th>
                         <th><input type="text" placeholder="Vault ID" value={vaultID} onChange={handleVaultID} style={{width: "5em"}}/></th>
-                        <th><button onClick={handleDateSort} style={{width: "2em", padding: "0"}}>{dateSort === "down"? <BsFillCaretDownFill/> : <BsFillCaretUpFill/>}</button></th>
+                        <th><button onClick={handleDateSort} style={{width: "2em", padding: "0"}}>{dateSort === "down"? <BsFillCaretDownFill/> : (dateSort === "up"? <BsFillCaretUpFill/> : <BsFillRecordFill/>)}</button></th>
                     </tr>
                     <tr>
                         <th>Collateral Liquidated</th>

@@ -7,6 +7,9 @@ export default function Token(props) {
     if (!decimal) {
         children = numberWithCommas(parseFloat((props.children)/Math.pow(10,18)).toFixed(18));
     }
+    else {
+        children = numberWithCommas(parseFloat((props.children)/Math.pow(10,decimal)).toFixed(decimal));
+    }
 
     return (
         <span>{children}</span>

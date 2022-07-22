@@ -138,10 +138,15 @@ tbody td {
 tbody td:first-child {
   text-align: right;
 }
-table input[type="text"] {
+table input[type="text"], table button {
   background: gray;
   color: white;
   text-align: center;
+  border-width: 2px;
+  border-color: #666;
+}
+table button {
+  border-style: outset;
 }
 table input[type="text"]::placeholder {
   color: lightgray;
