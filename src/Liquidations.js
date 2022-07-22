@@ -162,14 +162,14 @@ export default function Liquidations(props) {
             <table>
                 <thead>
                     <tr>
-                        <th><button onClick={handleLiquidatedSort} style={{width: "2em", padding: "0"}}>{liquidatedSort === "down"? <BsFillCaretDownFill/> : (liquidatedSort === "up"? <BsFillCaretUpFill/> : <BsFillRecordFill/>)}</button></th>
+                        <th><button onClick={handleLiquidatedSort}>{liquidatedSort === "down"? <BsFillCaretDownFill/> : (liquidatedSort === "up"? <BsFillCaretUpFill/> : <BsFillRecordFill/>)}</button></th>
                         <th></th>
-                        <th><button onClick={handleClosingSort} style={{width: "2em", padding: "0"}}>{closingSort === "down"? <BsFillCaretDownFill/> : (closingSort === "up"? <BsFillCaretUpFill/> : <BsFillRecordFill/>)}</button></th>
-                        <th><button onClick={handleRepaidSort} style={{width: "2em", padding: "0"}}>{repaidSort === "down"? <BsFillCaretDownFill/> : (repaidSort === "up"? <BsFillCaretUpFill/> : <BsFillRecordFill/>)}</button></th>
-                        <th><input type="text" placeholder="Buyer address" value={buyer} onChange={handleBuyer} style={{width: "8em"}}/></th>
-                        <th><input type="text" placeholder="Owner address" value={owner} onChange={handleOwner} style={{width: "8em"}}/></th>
-                        <th><input type="text" placeholder="Vault ID" value={vaultID} onChange={handleVaultID} style={{width: "5em"}}/></th>
-                        <th><button onClick={handleDateSort} style={{width: "2em", padding: "0"}}>{dateSort === "down"? <BsFillCaretDownFill/> : (dateSort === "up"? <BsFillCaretUpFill/> : <BsFillRecordFill/>)}</button></th>
+                        <th><button onClick={handleClosingSort}>{closingSort === "down"? <BsFillCaretDownFill/> : (closingSort === "up"? <BsFillCaretUpFill/> : <BsFillRecordFill/>)}</button></th>
+                        <th><button onClick={handleRepaidSort}>{repaidSort === "down"? <BsFillCaretDownFill/> : (repaidSort === "up"? <BsFillCaretUpFill/> : <BsFillRecordFill/>)}</button></th>
+                        <th><input type="text" placeholder="Buyer address" value={buyer} onChange={handleBuyer} /></th>
+                        <th><input type="text" placeholder="Owner address" value={owner} onChange={handleOwner} /></th>
+                        <th><input type="text" placeholder="Vault ID" value={vaultID} onChange={handleVaultID} /></th>
+                        <th><button onClick={handleDateSort}>{dateSort === "down"? <BsFillCaretDownFill/> : (dateSort === "up"? <BsFillCaretUpFill/> : <BsFillRecordFill/>)}</button></th>
                     </tr>
                     <tr>
                         <th>Collateral Liquidated</th>
