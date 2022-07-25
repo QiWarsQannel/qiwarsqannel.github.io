@@ -78,9 +78,10 @@ function App() {
                 </LinkContainer>
                 <LinkContainer to="/gauge/eqi">
                   <NavDropdown.Item>
-                    eQI
+                    Qi Powah
                   </NavDropdown.Item>
                 </LinkContainer>
+                <NavDropdown.Divider />
                 {[...Array(numGauges)].map((x, i) =>
                   <LinkContainer key={i} to={"/gauge/" + (i + 1)}>
                     <NavDropdown.Item>
@@ -98,9 +99,10 @@ function App() {
                 </LinkContainer>
                 <LinkContainer to="/dyst/eqi">
                   <NavDropdown.Item>
-                    eQI
+                    Qi Powah
                   </NavDropdown.Item>
                 </LinkContainer>
+                <NavDropdown.Divider />
                 {[...Array(numDystGauges)].map((x, i) =>
                   <LinkContainer key={i} to={"/dyst/" + (i + 1)}>
                     <NavDropdown.Item>
