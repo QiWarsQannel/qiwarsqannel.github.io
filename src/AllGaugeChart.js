@@ -31,6 +31,10 @@ ChartJS.register(
     zoomPlugin
 );
 
+function normalize_vote_name(str) {
+    return str.trim();
+}
+
 function format_gauge_data(input) {
     let ar = input["data"]["proposals"];
     var result = {};
@@ -41,12 +45,13 @@ function format_gauge_data(input) {
         let choices = a["choices"];
         let total = a.scores_total;
         for (let j = 0; j < a["choices"].length; j++) {
-            if (!(choices[j] in r)) {
-                let cor = stringToColour(choices[j]);
-                r[choices[j]] = { data: [], label: choices[j], fill: false, borderColor: cor, hidden: false };
+            let nchoice = normalize_vote_name(choices[j]);
+            if (!(nchoice in r)) {
+                let cor = stringToColour(nchoice);
+                r[nchoice] = { data: [], label: nchoice, fill: false, borderColor: cor, hidden: false };
             }
-            r[choices[j]]["data"][i] = (a["scores"][j] * 100) / total;
-            labels.pushIfNotIncluded("Gauge " + (i + 1));
+            r[nchoice]["data"][i] = (a["scores"][j] * 100) / total;
+            labels.pushIfNotIncluded("Round " + (i + 1));
         }
     }
     result["labels"] = labels;

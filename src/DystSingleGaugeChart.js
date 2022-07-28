@@ -35,7 +35,7 @@ function normalize_vote_name(str) {
         return a[1]+"/"+a[0];
     }
 
-    return str;
+    return str.trim();
 }
 
 function format_gauge_data(input, p) {

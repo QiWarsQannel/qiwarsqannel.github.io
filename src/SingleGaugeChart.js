@@ -28,6 +28,10 @@ ChartJS.register(
     Legend,
 );
 
+function normalize_vote_name(str) {
+    return str.trim();
+}
+
 function format_gauge_data(input, p) {
     let ar = input["data"]["proposals"];
     var result = {};
@@ -38,17 +42,18 @@ function format_gauge_data(input, p) {
     let choices = a["choices"];
     let total = a.scores_total;
     for (let j = 0; j < a["choices"].length; j++) {
-        if (!(choices[j] in r)) {
-            let cor = stringToColour(choices[j]);
-            r[choices[j]] = { data: [], label: choices[j], fill: true, backgroundColor: cor, hidden: false };
+        let nchoice = normalize_vote_name(choices[j]);
+        if (!(nchoice in r)) {
+            let cor = stringToColour(nchoice);
+            r[nchoice] = { data: [], label: nchoice, fill: true, backgroundColor: cor, hidden: false };
         }
-        r[choices[j]]["data"][0] = (a["scores"][j] * 100) / total;
-        labels.pushIfNotIncluded("Gauge " + (i + 1));
+        r[nchoice]["data"][0] = (a["scores"][j] * 100) / total;
+        labels.pushIfNotIncluded("Round " + (i + 1));
     }
 
     result["labels"] = labels;
     result["datasets"] = Object.values(r);
-    result.datasets.sort((a, b) => b.data[0] - a.data[0]);
+    result.datasets.sort((a,b) => b.data[0] - a.data[0]);
     return result
 }
 
