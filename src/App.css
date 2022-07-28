@@ -26,7 +26,8 @@ header nav u {
 nav * {
   text-decoration-color: #e24c54;
 }
-.total { 
+
+.total {
   color: #e24c54;
 }
 
@@ -101,7 +102,7 @@ table a {
   text-decoration-color: #e24c54;
 }
 
-table :not(button) > svg {
+table :not(button)>svg {
   color: #e24c54;
   margin-left: 5px;
 }
@@ -138,7 +139,9 @@ tbody td {
 tbody td:first-child {
   text-align: right;
 }
-table input[type="text"], table button {
+
+table input[type="text"],
+table button {
   background: gray;
   color: white;
   text-align: center;
@@ -150,20 +153,41 @@ table input[type="text"], table button {
   align-items: center;
   padding: 0;
 }
+
 table button {
   border-style: outset;
   width: 2em;
 }
+
 table input[type="text"] {
   width: 8em;
 }
+
 table input[type="text"]::placeholder {
   color: lightgray;
 }
+
 .copy-to-clipboard {
   cursor: pointer;
 }
 
 #liq ul {
   font-size: 18px;
+}
+
+.spin {
+  animation-name: spin;
+  animation-duration: 5000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }

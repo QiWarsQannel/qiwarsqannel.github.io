@@ -16,6 +16,7 @@ import LiquidationsList from './LiquidationsList';
 import { Navbar, NavDropdown, Container, Row, Col } from "react-bootstrap";
 import { LinkContainer } from 'react-router-bootstrap';
 import './bootstrap.scss';
+import BadDebtList from './BadDebtList';
 
 function count_gauges(input) {
   return input["data"]["proposals"].length;
@@ -153,6 +154,7 @@ function App() {
                 <Route path="/dyst/eqi" element={<TotalDystVotesChart legends api={api} />} />
                 <Route path="/dyst/:id" element={<DystSingleGaugeChart legends api={api} />} />
 
+                <Route path="/baddebt" element={<BadDebtList />} />
                 <Route path="/buybacks" element={<QiBuyBacks />} />
 
                 <Route path="/liq/" element={<LiquidationsList />} />
