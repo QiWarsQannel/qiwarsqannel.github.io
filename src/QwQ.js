@@ -279,7 +279,9 @@ export class VAULTS {
         "0x7cbf49e4214c7200af986bc4aacf7bc79dd9c19a": "cxDOGE",
         "0x506533b9c16ee2472a6bf37cc320ae45a0a24f11": "cxADA",
         "0x7d36999a69f2b99bf3fb98866cbbe47af43696c8": "cxWETH",
-        "0x178f1c95c85fe7221c7a6a3d6f12b7da3253eeae": "CEL"
+        "0x178f1c95c85fe7221c7a6a3d6f12b7da3253eeae": "CEL",
+        "0xaa19d0e397c964a35e6e80262c692dbfC9C23451": "xxDAI",
+        "0x11826d20B6A16A22450978642404dA95B4640123": "xxLINK",
     }
     static POLYGON_ALL = function () {
         let all = [];
