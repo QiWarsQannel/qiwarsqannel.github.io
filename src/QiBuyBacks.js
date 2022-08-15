@@ -9,7 +9,14 @@ export default function QiBuyBacks(props) {
 
     const fresh_threshold = 15;
     const fresh_color = "6ce24c";
-    const { data } = useMoralisQuery("PolygonTokenTransfers", (query) => query.equalTo("to_address", "0x1d8a6b7941ef1349c1b5e378783cd56b001ecfbc").equalTo("token_address", "0x580a84c73811e1839f75d86d75d88cca0c241ff4").limit(500));
+    const { data } = useMoralisQuery(
+        "PolygonTokenTransfers", 
+        (query) => query
+        .equalTo("to_address", "0x1d8a6b7941ef1349c1b5e378783cd56b001ecfbc")
+        .equalTo("token_address", "0x580a84c73811e1839f75d86d75d88cca0c241ff4")
+        .notEqualTo("from_address","0x574fe4e8120c4da1741b5fd45584de7a5b521f0f")
+        .limit(500)
+        );
     const getData = data => data;
     const sorted_data = [...getData(data)].sort((a, b) => b.attributes.block_number - a.attributes.block_number);
     const today = new Date();
