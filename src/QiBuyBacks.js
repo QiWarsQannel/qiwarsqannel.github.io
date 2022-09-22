@@ -6,13 +6,16 @@ import { numberWithCommas, mix_color } from "./QwQ.js";
 
 
 export default function QiBuyBacks(props) {
-
+    const dao_wallets = [
+        "0x1d8a6b7941ef1349c1b5e378783cd56b001ecfbc",
+        "0xf0f5f7c21d181b7a1f9aa36ed46db3e620eda385"
+    ];
     const fresh_threshold = 15;
     const fresh_color = "6ce24c";
     const { data } = useMoralisQuery(
         "PolygonTokenTransfers", 
         (query) => query
-        .equalTo("to_address", "0x1d8a6b7941ef1349c1b5e378783cd56b001ecfbc")
+        .containedIn("to_address", dao_wallets)
         .equalTo("token_address", "0x580a84c73811e1839f75d86d75d88cca0c241ff4")
         .notEqualTo("from_address","0x574fe4e8120c4da1741b5fd45584de7a5b521f0f")
         .limit(500)
