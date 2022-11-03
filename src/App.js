@@ -11,12 +11,9 @@ import { HashRouter, Routes, Route, Link } from 'react-router-dom';
 import { setup } from 'axios-cache-adapter';
 import QwQ, { VAULTS } from './QwQ';
 import QiBuyBacks from './QiBuyBacks';
-import Liquidations from './Liquidations';
-import LiquidationsList from './LiquidationsList';
 import { Navbar, NavDropdown, Container, Row, Col } from "react-bootstrap";
 import { LinkContainer } from 'react-router-bootstrap';
 import './bootstrap.scss';
-import BadDebtList from './BadDebtList';
 
 function count_gauges(input) {
   return input["data"]["proposals"].length;
@@ -119,11 +116,6 @@ function App() {
                     Buybacks
                   </NavDropdown.Item>
                 </LinkContainer>
-                <LinkContainer to="/liq">
-                  <NavDropdown.Item>
-                    Liquidations
-                  </NavDropdown.Item>
-                </LinkContainer>
               </NavDropdown >
             </Navbar.Collapse>
 
@@ -154,37 +146,7 @@ function App() {
                 <Route path="/dyst/eqi" element={<TotalDystVotesChart legends api={api} />} />
                 <Route path="/dyst/:id" element={<DystSingleGaugeChart legends api={api} />} />
 
-                <Route path="/baddebt" element={<BadDebtList />} />
                 <Route path="/buybacks" element={<QiBuyBacks />} />
-
-                <Route path="/liq/" element={<LiquidationsList />} />
-                {VAULTS.POLYGON_ALL().map((x, i) =>
-                  <>
-                    <Route key={i} path={"/liq/polygon/" + x} element={<Liquidations chain="Polygon" collateral={x} />} />
-                    <Route key={i} path={"/liq/polygon/" + x + "/:page"} element={<Liquidations chain="Polygon" collateral={x} />} />
-                  </>
-                )}
-
-                {VAULTS.BINANCE_ALL().map((x, i) =>
-                  <>
-                    <Route key={i} path={"/liq/binance/" + x} element={<Liquidations chain="Binance" collateral={x} />} />
-                    <Route key={i} path={"/liq/binance/" + x + "/:page"} element={<Liquidations chain="Binance" collateral={x} />} />
-                  </>
-                )}
-
-                {VAULTS.FANTOM_ALL().map((x, i) =>
-                  <>
-                    <Route key={i} path={"/liq/fantom/" + x} element={<Liquidations chain="Fantom" collateral={x} />} />
-                    <Route key={i} path={"/liq/fantom/" + x + "/:page"} element={<Liquidations chain="Fantom" collateral={x} />} />
-                  </>
-                )}
-
-                {VAULTS.AVALANCHE_ALL().map((x, i) =>
-                  <>
-                    <Route key={i} path={"/liq/avalanche/" + x} element={<Liquidations chain="Avalanche" collateral={x} />} />
-                    <Route key={i} path={"/liq/avalanche/" + x + "/:page"} element={<Liquidations chain="Avalanche" collateral={x} />} />
-                  </>
-                )}
 
               </Routes>
             </Col>
