@@ -34,6 +34,10 @@ function App() {
   const [numGauges, setNumGauges] = React.useState();
   const [numDystGauges, setNumDystGauges] = React.useState();
 
+  function openExternalURL(URL) {
+    window.location = URL;
+  }
+
   React.useEffect(() => {
     if (!numGauges) {
       api
@@ -111,11 +115,9 @@ function App() {
 
               </NavDropdown >
               <NavDropdown title="Tools">
-                <LinkContainer to="/buybacks">
-                  <NavDropdown.Item>
-                    Buybacks
+                <NavDropdown.Item onClick={() => openExternalURL("https://qiwarsqannel.github.io/qips/")}>
+                    QIPs
                   </NavDropdown.Item>
-                </LinkContainer>
               </NavDropdown >
             </Navbar.Collapse>
 
